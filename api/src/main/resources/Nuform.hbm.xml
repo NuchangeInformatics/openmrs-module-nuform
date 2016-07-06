@@ -5,16 +5,28 @@
 
 <hibernate-mapping package="org.openmrs.module.nuform">
 
-<!--
-	<class name="Nuform"
-		table="nuform">
+
+    <class name="NuformDef"
+           table="nuform-def">
 		<id name="id" type="int" column="id" unsaved-value="0">
 			<generator class="native" />
 		</id>
 		<discriminator column="id" insert="false" />
 		<property name="uuid" type="java.lang.String" column="uuid"
 			length="38" unique="true" />
-	</class>
--->
+        <property name="created_by" type="java.lang.String" column="created_by" length="38"/>
+        <property name="deleted_by" type="java.lang.String" column="deleted_by" length="38"/>
+        <property name="created_on" type="java.util.Date" column="created_on"
+                  length="38"/>
+        <property name="deleted_on" type="java.util.Date" column="deleted_on"
+                  length="38"/>
+        <property name="formtype" type="java.lang.String" column="formtype" length="1"/>
+        <property name="status" type="java.lang.String" column="status" length="1"/>
+        <property name="background" type="java.lang.String" column="background" length="255"/>
+
+        <property name="comments" type="java.lang.String" column="comments"/>
+
+    </class>
+
 
 </hibernate-mapping>

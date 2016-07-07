@@ -34,7 +34,7 @@ public class NuformDef extends BaseOpenmrsObject implements Serializable {
     private Date deleted_on;
 
     private String formtype = PATIENTFORM;
-    private String background;
+    private String backgroundImage;
 
     private String status = ACTIVE;
     private String comments;
@@ -89,12 +89,12 @@ public class NuformDef extends BaseOpenmrsObject implements Serializable {
         this.formtype = formtype;
     }
 
-    public String getBackground() {
-        return background;
+    public String getBackgroundImage() {
+        return backgroundImage;
     }
 
-    public void setBackground(String background) {
-        this.background = background;
+    public void setBackgroundImage(String backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 
     public String getStatus() {

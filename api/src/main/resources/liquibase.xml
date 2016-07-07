@@ -25,7 +25,7 @@
 
             <column name="formtype" type="char(1)"/>
             <column name="status" type="char(1)"/>
-            <column name="background" type="char(255)"/>
+            <column name="backgroundImage" type="char(255)"/>
             <column name="comments" type="text"/>
 
         </createTable>

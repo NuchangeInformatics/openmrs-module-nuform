@@ -22,7 +22,7 @@
                   length="38"/>
         <property name="formtype" type="java.lang.String" column="formtype" length="1"/>
         <property name="status" type="java.lang.String" column="status" length="1"/>
-        <property name="background" type="java.lang.String" column="background" length="255"/>
+        <property name="backgroundImage" type="java.lang.String" column="backgroundImage" length="255"/>
 
         <property name="comments" type="java.lang.String" column="comments"/>
 

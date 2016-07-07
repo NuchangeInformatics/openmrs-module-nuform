@@ -9,6 +9,8 @@
  */
 package org.openmrs.module.nuform.api.db;
 
+import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
 
 /**
@@ -19,4 +21,17 @@ public interface NuformDAO {
 	/*
 	 * Add DAO methods here
 	 */
+    NuformDef[] getAllDef();
+
+    Nuform[] getAllNuforms();
+
+    Nuform getNuformById(int id);
+
+    Nuform saveNuform(Nuform nuform);
+
+    NuformDef getNuformDefById(int id);
+
+    NuformDef saveNuformDef(NuformDef nuformDef);
+
+    Nuform[] getAllNuformsByDef(NuformDef nuformDef);
 }

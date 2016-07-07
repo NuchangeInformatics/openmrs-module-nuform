@@ -38,7 +38,9 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="uuid" type="char(38)"/>
-            <column name="nuformId" type="char(38)"/>
+            <column name="nuformDef" type="int">
+                <constraints nullable="false"/>
+            </column>
 
 
             <column name="created_by" type="char(38)"/>

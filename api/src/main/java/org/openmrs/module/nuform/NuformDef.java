@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -16,40 +16,38 @@ import java.io.Serializable;
 import java.util.Date;
 
 import static org.openmrs.module.nuform.NuformConstants.ACTIVE;
+import static org.openmrs.module.nuform.NuformConstants.PATIENTFORM;
 
 /**
  * It is a model class. It should extend either {@link BaseOpenmrsObject} or {@link BaseOpenmrsMetadata}.
  */
-public class Nuform extends BaseOpenmrsObject implements Serializable {
+public class NuformDef extends BaseOpenmrsObject implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	private Integer id;
+    private static final long serialVersionUID = 1L;
 
-    private NuformDef nuformDef;
+    private Integer id;
 
     private String created_by;
     private String deleted_by;
-    private String last_edited_by;
 
     private Date created_on;
     private Date deleted_on;
-    private Date last_edited_on;
 
-    private String patientId;
-    private String lesionmap;
+    private String formtype = PATIENTFORM;
+    private String backgroundImage;
+
     private String status = ACTIVE;
     private String comments;
 
     @Override
-	public Integer getId() {
-		return id;
-	}
-	
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getCreated_by() {
         return created_by;
@@ -65,14 +63,6 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
 
     public void setDeleted_by(String deleted_by) {
         this.deleted_by = deleted_by;
-    }
-
-    public String getLast_edited_by() {
-        return last_edited_by;
-    }
-
-    public void setLast_edited_by(String last_edited_by) {
-        this.last_edited_by = last_edited_by;
     }
 
     public Date getCreated_on() {
@@ -91,28 +81,20 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
         this.deleted_on = deleted_on;
     }
 
-    public Date getLast_edited_on() {
-        return last_edited_on;
+    public String getFormtype() {
+        return formtype;
     }
 
-    public void setLast_edited_on(Date last_edited_on) {
-        this.last_edited_on = last_edited_on;
+    public void setFormtype(String formtype) {
+        this.formtype = formtype;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getBackgroundImage() {
+        return backgroundImage;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
-    }
-
-    public String getLesionmap() {
-        return lesionmap;
-    }
-
-    public void setLesionmap(String lesionmap) {
-        this.lesionmap = lesionmap;
+    public void setBackgroundImage(String backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 
     public String getStatus() {
@@ -129,13 +111,5 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
-
-    public NuformDef getNuformDef() {
-        return nuformDef;
-    }
-
-    public void setNuformDef(NuformDef nuformDef) {
-        this.nuformDef = nuformDef;
     }
 }

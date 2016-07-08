@@ -1,12 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
     <!--
         See http://www.liquibase.org/manual/home#available_database_refactorings
         for a list of supported elements and attributes
     -->
-    
+
+    <changeSet author="beapen" id="20160706-1">
+        <comment>Create the NuForm Definition Table</comment>
+        <createTable tableName="nuformdef">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)"/>
+
+            <column name="created_by" type="char(38)"/>
+            <column name="deleted_by" type="char(38)"/>
+
+            <column name="created_on" type="datetime"/>
+            <column name="deleted_on" type="datetime"/>
+
+            <column name="formtype" type="char(1)"/>
+            <column name="status" type="char(1)"/>
+            <column name="backgroundImage" type="char(255)"/>
+            <column name="comments" type="text"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="beapen" id="20160706-2">
+        <comment>Create the NuForm Instance Table</comment>
+        <createTable tableName="nuform">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="char(38)"/>
+            <column name="nuformDef" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="created_by" type="char(38)"/>
+            <column name="deleted_by" type="char(38)"/>
+            <column name="last_edited_by" type="char(38)"/>
+
+            <column name="created_on" type="datetime"/>
+            <column name="deleted_on" type="datetime"/>
+            <column name="last_edited_on" type="datetime"/>
+
+            <column name="patientId" type="char(38)"/>
+            <column name="status" type="char(1)"/>
+            <column name="lesionmap" type="text"/>
+            <column name="comments" type="text"/>
+
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

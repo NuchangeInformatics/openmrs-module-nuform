@@ -9,7 +9,12 @@
  */
 package org.openmrs.module.nuform.api.db;
 
+import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  *  Database methods for {@link NuformService}.
@@ -19,4 +24,28 @@ public interface NuformDAO {
 	/*
 	 * Add DAO methods here
 	 */
+    @Transactional(readOnly = true)
+    List<NuformDef> getAllDef();
+
+    @Transactional(readOnly = true)
+    List getAllDefWithDeleted();
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuforms();
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuformsWithDeleted();
+
+    @Transactional(readOnly = true)
+    Nuform getNuformById(int id);
+
+    Nuform saveNuform(Nuform nuform);
+
+    @Transactional(readOnly = true)
+    NuformDef getNuformDefById(int id);
+
+    NuformDef saveNuformDef(NuformDef nuformDef);
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuformsByDef(NuformDef nuformDef);
 }

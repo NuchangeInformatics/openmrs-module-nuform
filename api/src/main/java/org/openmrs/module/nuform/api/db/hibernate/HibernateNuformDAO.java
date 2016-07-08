@@ -14,25 +14,40 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.openmrs.module.nuform.api.db.NuformDAO;
 
+import java.util.List;
+
 /**
  * It is a default implementation of  {@link NuformDAO}.
  */
+@SuppressWarnings("JpaQlInspection")
 public class HibernateNuformDAO implements NuformDAO {
 	protected final Log log = LogFactory.getLog(this.getClass());
 	
 	private SessionFactory sessionFactory;
 	
 	/**
-     * @param sessionFactory the sessionFactory to set
-     */
-    public void setSessionFactory(SessionFactory sessionFactory) {
-	    this.sessionFactory = sessionFactory;
-    }
-    
-	/**
      * @return the sessionFactory
      */
     public SessionFactory getSessionFactory() {
-	    return sessionFactory;
+        return sessionFactory;
     }
+    
+	/**
+     * @param sessionFactory the sessionFactory to set
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    // REF: http://levelup.lishman.com/spring/hibernate-orm/quick-start.php
+    @Override
+    public List getAllDefWithDeleted() {
+        return sessionFactory.getCurrentSession().createQuery("from nuformdef").list();
+    }
+
+    @Override
+    public List getAllNuformsWithDeleted() {
+        return sessionFactory.getCurrentSession().createQuery("from nuform").list();
+    }
+
 }

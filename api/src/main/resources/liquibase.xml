@@ -11,7 +11,7 @@
 
     <changeSet author="beapen" id="20160706-1">
         <comment>Create the NuForm Definition Table</comment>
-        <createTable tableName="nuform-def">
+        <createTable tableName="nuformdef">
             <column autoIncrement="true" name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

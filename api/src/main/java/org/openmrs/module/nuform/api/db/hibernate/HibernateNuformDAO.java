@@ -12,6 +12,9 @@ package org.openmrs.module.nuform.api.db.hibernate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformConstants;
+import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.db.NuformDAO;
 
 import java.util.List;
@@ -46,8 +49,66 @@ public class HibernateNuformDAO implements NuformDAO {
     }
 
     @Override
+    public List getAllDef() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from nuformdef " +
+                        "where nuformdef.status <> :status")
+                .setParameter("status", NuformConstants.DELETED)
+                .list();
+    }
+
+    @Override
     public List getAllNuformsWithDeleted() {
         return sessionFactory.getCurrentSession().createQuery("from nuform").list();
+    }
+
+    @Override
+    public List getAllNuforms() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from nuform " +
+                        "where nuform.status <> :status")
+                .setParameter("status", NuformConstants.DELETED)
+                .list();
+    }
+
+    @Override
+    public List getAllNuformsByDef(NuformDef nuformDef) {
+        int id = nuformDef.getId();
+        return sessionFactory.getCurrentSession()
+                .createQuery("from nuform " +
+                        "where nuform.nuformDef = :id")
+                .setParameter("id", id)
+                .list();
+    }
+
+    @Override
+    public Nuform getNuformById(int id) {
+        return (Nuform) sessionFactory.getCurrentSession()
+                .createQuery("from nuform " +
+                        "where nuform.id = :id")
+                .setParameter("id", id)
+                .uniqueResult();
+    }
+
+    @Override
+    public NuformDef getNuformDefById(int id) {
+        return (NuformDef) sessionFactory.getCurrentSession()
+                .createQuery("from nuformdef " +
+                        "where nuformdef.id = :id")
+                .setParameter("id", id)
+                .uniqueResult();
+    }
+
+    @Override
+    public Nuform saveNuform(Nuform nuform) {
+        sessionFactory.getCurrentSession().saveOrUpdate(nuform);
+        return nuform;
+    }
+
+    @Override
+    public NuformDef saveNuformDef(NuformDef nuformDef) {
+        sessionFactory.getCurrentSession().saveOrUpdate(nuformDef);
+        return nuformDef;
     }
 
 }

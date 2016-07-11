@@ -10,7 +10,11 @@
 package org.openmrs.module.nuform.api;
 
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformDef;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
@@ -29,4 +33,28 @@ public interface NuformService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
+    @Transactional(readOnly = true)
+    List<NuformDef> getAllDef();
+
+    @Transactional(readOnly = true)
+    List getAllDefWithDeleted();
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuforms();
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuformsWithDeleted();
+
+    @Transactional(readOnly = true)
+    Nuform getNuformById(int id);
+
+    Nuform saveNuform(Nuform nuform);
+
+    @Transactional(readOnly = true)
+    NuformDef getNuformDefById(int id);
+
+    NuformDef saveNuformDef(NuformDef nuformDef);
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuformsByDef(NuformDef nuformDef);
 }

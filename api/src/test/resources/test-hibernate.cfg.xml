@@ -5,6 +5,6 @@
 
 <hibernate-configuration>
     <session-factory>
-        <mapping resource="SkinHelpDesk.hbm.xml"/>
+        <mapping resource="Nuform.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

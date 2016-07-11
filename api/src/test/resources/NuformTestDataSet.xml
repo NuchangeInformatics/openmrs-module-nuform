@@ -11,18 +11,15 @@
 
 
 
-===Database openmrs
+
 -->
 
 <dataset>
     <NuformDef id="1" uuid="6e3e3a5c-aedb-494f-940e-e4d65fa7e9fd"
-               created_by="beapen" deleted_by="" created_on="2016-12-12"
-               deleted_on="" formtype="1" background="default.png"
+               created_by="beapen" deleted_by="" formtype="1" backgroundImage="default.png"
                status="1" comments="test comment"/>
     <Nuform id="1" uuid="6a3d3a5c-aedb-494f-940e-e4d65fa7e9fd"
-            nuformDef="1" patientId="1" leaionmap=""
+            nuformDef="1" patientId="1" lesionmap=""
             created_by="beapen" last_edited_by="beapen" deleted_by=""
-            created_on="2016-12-12" last_edited_on="2016-12-13"
-            deleted_on="" formtype="1" background="default.png"
             status="1" comments="test comment"/>
 </dataset>

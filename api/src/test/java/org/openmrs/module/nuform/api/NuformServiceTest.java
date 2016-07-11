@@ -9,18 +9,48 @@
  */
 package org.openmrs.module.nuform.api;
 
-import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+
+
 /**
- * Tests {@link ${${module-name-no-spaces}Service}}.
+ * Tests
  */
 public class  NuformServiceTest extends BaseModuleContextSensitiveTest {
-	
-	@Test
-	public void shouldSetupContext() {
+    private NuformService nuformService;
+
+    @Before
+    public void setUp() {
+        nuformService = Context.getService(NuformService.class);
+        try {
+            executeDataSet("NuformTestDataSet.xml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void shouldSetupContext() {
 		assertNotNull(Context.getService(NuformService.class));
 	}
+
+    @Test
+    public void shouldReturnAllDefsWithDeleted() {
+        List<NuformDef> nuformDefs = nuformService.getAllDefWithDeleted();
+        assertNotNull(nuformDefs);
+    }
+
+    @Test
+    public void shouldReturnAllDefs() {
+        List<NuformDef> nuformDefs = nuformService.getAllDef();
+        assertNotNull(nuformDefs);
+    }
 }

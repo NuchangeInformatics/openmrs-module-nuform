@@ -12,6 +12,7 @@ package org.openmrs.module.nuform.api.db.hibernate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.NuformDef;
@@ -45,29 +46,29 @@ public class HibernateNuformDAO implements NuformDAO {
     // REF: http://levelup.lishman.com/spring/hibernate-orm/quick-start.php
     @Override
     public List getAllDefWithDeleted() {
-        return sessionFactory.getCurrentSession().createQuery("from nuformdef").list();
+        return sessionFactory.getCurrentSession().createCriteria(NuformDef.class).list();
     }
 
     @Override
     public List getAllDef() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from nuformdef " +
-                        "where nuformdef.status <> :status")
-                .setParameter("status", NuformConstants.DELETED)
+                .createCriteria(NuformDef.class)
+                .add(Restrictions.ne("status", NuformConstants.DELETED))
                 .list();
+
     }
 
     @Override
     public List getAllNuformsWithDeleted() {
-        return sessionFactory.getCurrentSession().createQuery("from nuform").list();
+        return sessionFactory.getCurrentSession().createCriteria(Nuform.class).list();
+
     }
 
     @Override
     public List getAllNuforms() {
         return sessionFactory.getCurrentSession()
-                .createQuery("from nuform " +
-                        "where nuform.status <> :status")
-                .setParameter("status", NuformConstants.DELETED)
+                .createCriteria(Nuform.class)
+                .add(Restrictions.ne("status", NuformConstants.DELETED))
                 .list();
     }
 
@@ -75,27 +76,24 @@ public class HibernateNuformDAO implements NuformDAO {
     public List getAllNuformsByDef(NuformDef nuformDef) {
         int id = nuformDef.getId();
         return sessionFactory.getCurrentSession()
-                .createQuery("from nuform " +
-                        "where nuform.nuformDef = :id")
-                .setParameter("id", id)
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("nuformDef", id))
                 .list();
     }
 
     @Override
     public Nuform getNuformById(int id) {
         return (Nuform) sessionFactory.getCurrentSession()
-                .createQuery("from nuform " +
-                        "where nuform.id = :id")
-                .setParameter("id", id)
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("id", id))
                 .uniqueResult();
     }
 
     @Override
     public NuformDef getNuformDefById(int id) {
         return (NuformDef) sessionFactory.getCurrentSession()
-                .createQuery("from nuformdef " +
-                        "where nuformdef.id = :id")
-                .setParameter("id", id)
+                .createCriteria(NuformDef.class)
+                .add(Restrictions.eq("id", id))
                 .uniqueResult();
     }
 

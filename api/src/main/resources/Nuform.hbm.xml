@@ -7,7 +7,7 @@
 
 
     <class name="NuformDef"
-           table="nuform-def">
+           table="nuformdef">
 		<id name="id" type="int" column="id" unsaved-value="0">
 			<generator class="native" />
 		</id>

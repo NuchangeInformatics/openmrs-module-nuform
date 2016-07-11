@@ -74,10 +74,9 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public List getAllNuformsByDef(NuformDef nuformDef) {
-        int id = nuformDef.getId();
         return sessionFactory.getCurrentSession()
                 .createCriteria(Nuform.class)
-                .add(Restrictions.eq("nuformDef", id))
+                .add(Restrictions.eq("nuformDef", nuformDef))
                 .list();
     }
 

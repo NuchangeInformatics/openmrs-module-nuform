@@ -22,4 +22,9 @@
             nuformDef="1" patientId="1" lesionmap=""
             created_by="beapen" last_edited_by="beapen" deleted_by=""
             status="1" comments="test comment"/>
+    <Nuform id="2" uuid="6a3d3a5a-aebb-494f-940e-e4d65fa7e9fd"
+            nuformDef="1" patientId="1" lesionmap=""
+            created_by="beapen" last_edited_by="beapen" deleted_by=""
+            status="1" comments="test comment"/>
+
 </dataset>

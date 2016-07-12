@@ -1,10 +1,10 @@
-package org.openmrs.module.dermimage.web;
+package org.openmrs.module.nuform.web;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.openmrs.module.dermimage.fragment.controller.DermimageFragmentController;
+import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.util.OpenmrsUtil;
 
 import javax.servlet.ServletException;
@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  * Servlet implementation class DermUploadServlet
  */
-public class DermUploadServlet extends HttpServlet {
+public class NuformUploadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     //private static final String DATA_DIRECTORY = "data";
@@ -32,8 +31,6 @@ public class DermUploadServlet extends HttpServlet {
         //Separator
         String sep = File.separator;
 
-        //PatientId passed as a parameter
-        String patientId = URLDecoder.decode(request.getParameter("patientId"), "UTF-8").trim();
 
         // Check that we have a file upload request
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -44,7 +41,7 @@ public class DermUploadServlet extends HttpServlet {
 
 
         if (!isMultipart) {
-            response.getWriter().write(DermimageFragmentController.MESSAGE_ERROR);
+            response.getWriter().write(NuformConstants.ERROR);
             return;
         }
 
@@ -62,7 +59,7 @@ public class DermUploadServlet extends HttpServlet {
 
         // constructs the folder where uploaded file will be stored
         String uploadFolder = OpenmrsUtil.getApplicationDataDirectory() +
-                sep + "patient_images" + sep + patientId + sep;
+                sep + "nuform" + sep;
 
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -89,14 +86,14 @@ public class DermUploadServlet extends HttpServlet {
 
             // displays referrer page after upload finished
             // Ref Stackoverflow 4112686
-            response.getWriter().write(DermimageFragmentController.MESSAGE_SUCCESS);
+            response.getWriter().write(NuformConstants.SUCCESS);
             //getServletContext().getRequestDispatcher("/done.jsp").forward(request, response);
 
         } catch (FileUploadException ex) {
-            response.getWriter().write(DermimageFragmentController.MESSAGE_ERROR);
+            response.getWriter().write(NuformConstants.ERROR);
             throw new ServletException(ex);
         } catch (Exception ex) {
-            response.getWriter().write(DermimageFragmentController.MESSAGE_ERROR);
+            response.getWriter().write(NuformConstants.ERROR);
             throw new ServletException(ex);
         }
 

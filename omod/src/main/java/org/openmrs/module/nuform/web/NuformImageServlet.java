@@ -1,4 +1,4 @@
-package org.openmrs.module.dermimage.web;
+package org.openmrs.module.nuform.web;
 
 import org.openmrs.util.OpenmrsUtil;
 
@@ -13,13 +13,16 @@ import java.net.URLDecoder;
  * Original file from openmrs-module-patientimage
  * Modified by beapen on 25/05/16.
  */
-public class DermImageServlet extends HttpServlet {
+public class NuformImageServlet extends HttpServlet {
 
     // Constants ----------------------------------------------------------------------------------
     private static final int DEFAULT_BUFFER_SIZE = 102400; // 100KB.
 
     // Properties ---------------------------------------------------------------------------------
     private String imagePath;
+
+    //Separator
+    private String sep = File.separator;
 
     private static void close(Closeable resource) {
         if (resource != null) {
@@ -33,23 +36,20 @@ public class DermImageServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        this.imagePath = OpenmrsUtil.getApplicationDataDirectory() + "/patient_images/";
+        this.imagePath = OpenmrsUtil.getApplicationDataDirectory() + sep + "nuform" + sep;
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Image data serialized as a String
         String requestedImage = request.getParameter("image");
-        // PatienId passed as a parameter
-        String patId = URLDecoder.decode(request.getParameter("patId"), "UTF-8").trim();
-        String finalPath = imagePath + patId;
 
         if (requestedImage == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        File image = new File(finalPath, URLDecoder.decode(requestedImage, "UTF-8"));
+        File image = new File(imagePath, URLDecoder.decode(requestedImage, "UTF-8"));
         if (!image.exists()) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;

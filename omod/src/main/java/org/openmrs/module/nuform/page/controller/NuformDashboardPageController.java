@@ -3,6 +3,8 @@ package org.openmrs.module.nuform.page.controller;
 import org.apache.commons.io.FileUtils;
 import org.openmrs.module.appui.UiSessionContext;
 import org.openmrs.module.nuform.NuformConstants;
+import org.openmrs.module.nuform.api.NuformService;
+import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.util.OpenmrsUtil;
 import org.springframework.expression.EvaluationException;
@@ -18,6 +20,7 @@ import java.util.Arrays;
 public class NuformDashboardPageController {
 
     public void controller(UiSessionContext sessionContext,
+                           @SpringBean NuformService nuformService,
                            PageModel model) throws EvaluationException, IOException {
 
         String sep = File.separator;

@@ -39,7 +39,7 @@
 <script>
     var jq = jQuery;
     var image_pointer = 0;
-    var folder = "../../moduleServlet/nuform/NuformImageServlet?image=";
+    var folder = "../moduleServlet/nuform/NuformImageServlet?image=";
     var filesList = "${listOfFiles}";
     var num_files = ${numberOfFiles};
 
@@ -117,9 +117,8 @@
         });
 
         jq("#but_delete").click(function (e) {
-            jq.post("${ ui.actionLink("deleteImage")}", {
+            jq.post("${ ui.actionLink("nuform","NuFormDashboardPageController","deleteImage")}", {
                         returnFormat: 'json',
-                        patientId: "${patient.id}",
                         type: "data",
                         image: (filesList[image_pointer]).trim()
                     },
@@ -142,7 +141,7 @@
 <!-- img tag -->
 <div id="file_date"></div>
 <img alt="" id="patientimg" width="320" height="240"
-     src="../../ms/uiframework/resource/nuform/images/blank.png"/>
+     src="../ms/uiframework/resource/nuform/images/blank.png"/>
 
 
 <!-- Buttons -->
@@ -161,7 +160,7 @@
 
 <!-- Upload form -->
 <div id="upload_form">
-    <form id="UploadForm" method="post" action="../../moduleServlet/nuform/NuformUploadServlet"
+    <form id="UploadForm" method="post" action="../moduleServlet/nuform/NuformUploadServlet"
           enctype="multipart/form-data">
         Select Image to upload:
         <input type="file" size="60" id="myfile" name="myfile">

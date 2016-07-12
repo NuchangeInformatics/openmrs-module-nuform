@@ -24,7 +24,16 @@
 	
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.NuformActivator</activator>
-	
+
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>NuformImageServlet</servlet-name>
+        <servlet-class>${project.parent.groupId}.${project.parent.artifactId}.web.NuformImageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NuformUploadServlet</servlet-name>
+        <servlet-class>${project.parent.groupId}.${project.parent.artifactId}.web.NuformUploadServlet</servlet-class>
+    </servlet>
 	
 	<!-- Adds link to admin page -->
 	<extension>

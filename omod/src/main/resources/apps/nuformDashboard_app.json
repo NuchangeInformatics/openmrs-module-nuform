@@ -1,0 +1,18 @@
+[
+  {
+    "id": "nuform.nuformDashboard",
+    "description": "Dashboard for uploading images and listing existing NuForms",
+    "order": 899,
+    "requiredPrivilege": "App: nuform.nuformDashboard",
+    "extensions": [
+      {
+        "id": "nuform.nuformDashboardHomepageLink",
+        "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+        "type": "link",
+        "label": "NuForm Dashboard",
+        "url": "nuform/nuformDashboard.page?app=nuform.nuformDashboard",
+        "icon": "icon-pencil"
+      }
+    ]
+  }
+]

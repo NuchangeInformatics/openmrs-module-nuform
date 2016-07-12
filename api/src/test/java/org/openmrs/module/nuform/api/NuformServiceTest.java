@@ -44,27 +44,17 @@ public class  NuformServiceTest extends BaseModuleContextSensitiveTest {
 		assertNotNull(Context.getService(NuformService.class));
 	}
 
-    @Test
-    public void shouldReturnAllDefsWithDeleted() {
-        List<NuformDef> nuformDefs = nuformService.getAllDefWithDeleted();
-        assertNotNull(nuformDefs);
-    }
 
     @Test
     public void shouldReturnAllDefs() {
-        List<NuformDef> nuformDefs = nuformService.getAllDef();
+        List<NuformDef> nuformDefs = nuformService.getAllDef("");
         assertNotNull(nuformDefs);
     }
 
-    @Test
-    public void shouldReturnAllNuformsWithDeleted() {
-        List<Nuform> nuform = nuformService.getAllNuformsWithDeleted();
-        assertNotNull(nuform);
-    }
 
     @Test
     public void shouldReturnAllNuforms() {
-        List<Nuform> nuform = nuformService.getAllNuforms();
+        List<Nuform> nuform = nuformService.getAllNuforms("");
         assertNotNull(nuform);
     }
 

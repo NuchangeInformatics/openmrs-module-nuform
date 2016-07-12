@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.nuform.Nuform;
-import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.db.NuformDAO;
 
@@ -44,32 +43,29 @@ public class HibernateNuformDAO implements NuformDAO {
     }
 
     // REF: http://levelup.lishman.com/spring/hibernate-orm/quick-start.php
-    @Override
-    public List getAllDefWithDeleted() {
-        return sessionFactory.getCurrentSession().createCriteria(NuformDef.class).list();
-    }
 
     @Override
-    public List getAllDef() {
+    public List getAllDef(String status) {
+        if (status.isEmpty())
+            return sessionFactory.getCurrentSession()
+                    .createCriteria(NuformDef.class)
+                    .list();
         return sessionFactory.getCurrentSession()
                 .createCriteria(NuformDef.class)
-                .add(Restrictions.ne("status", NuformConstants.DELETED))
+                .add(Restrictions.ne("status", status))
                 .list();
 
     }
 
     @Override
-    public List getAllNuformsWithDeleted() {
-        return sessionFactory.getCurrentSession().createCriteria(Nuform.class).list();
-
-    }
-
-    @Override
-    public List getAllNuforms() {
-        // Do not list deleted and patient specific images for annotation
+    public List getAllNuforms(String status) {
+        if (status.isEmpty())
+            return sessionFactory.getCurrentSession()
+                    .createCriteria(Nuform.class)
+                    .list();
         return sessionFactory.getCurrentSession()
                 .createCriteria(Nuform.class)
-                .add(Restrictions.eq("status", NuformConstants.ACTIVE))
+                .add(Restrictions.eq("status", status))
                 .list();
     }
 

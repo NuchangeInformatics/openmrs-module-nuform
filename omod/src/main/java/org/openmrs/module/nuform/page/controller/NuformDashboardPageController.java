@@ -37,25 +37,4 @@ public class NuformDashboardPageController {
     }
 
 
-    /**
-     * @param patientId as String
-     * @param image     as String
-     * @return Object with Message: Added
-     * @should return object with the message added
-     */
-
-//    public Object deleteImage(@RequestParam("patientId") String patientId,
-//                              @RequestParam("image") String image) {
-//
-//        SimpleObject output;
-//        String sep = File.separator;
-//        File toDelete = new File(OpenmrsUtil.getApplicationDataDirectory() +
-//                sep + "patient_images" + sep + patientId.trim() + sep + image.trim());
-//        if (toDelete.delete()) {
-//            output = SimpleObject.create("message", MESSAGE_SUCCESS);
-//        } else {
-//            output = SimpleObject.create("message", MESSAGE_ERROR);
-//        }
-//        return output;
-//    }
 }

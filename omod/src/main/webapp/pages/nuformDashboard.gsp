@@ -117,6 +117,7 @@
         });
 
         jq("#but_delete").click(function (e) {
+            //TODO: Delete function in fragment
             jq.post("${ ui.actionLink("nuform","NuFormDashboardPageController","deleteImage")}", {
                         returnFormat: 'json',
                         type: "data",
@@ -143,7 +144,7 @@
 <img alt="" id="patientimg" width="320" height="240"
      src="../ms/uiframework/resource/nuform/images/blank.png"/>
 
-
+<br>
 <!-- Buttons -->
 <a class="button" id="but_left">
     <i class="icon-arrow-left"></i>

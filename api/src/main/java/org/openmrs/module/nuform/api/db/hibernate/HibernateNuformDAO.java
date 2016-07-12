@@ -66,9 +66,10 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public List getAllNuforms() {
+        // Do not list deleted and patient specific images for annotation
         return sessionFactory.getCurrentSession()
                 .createCriteria(Nuform.class)
-                .add(Restrictions.ne("status", NuformConstants.DELETED))
+                .add(Restrictions.eq("status", NuformConstants.ACTIVE))
                 .list();
     }
 

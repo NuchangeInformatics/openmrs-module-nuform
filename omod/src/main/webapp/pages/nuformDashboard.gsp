@@ -97,6 +97,16 @@
             }
         });
 
+        jq("#but_usethis").click(function (e) {
+            if (filesList[image_pointer].trim().length > 0) {
+                jq("#backgroundImage").val(filesList[image_pointer]);
+            }
+        });
+
+        jq("#nuform-create").click(function (e) {
+            e.preventDefault();
+        });
+
         jq("#but_right").click(function (e) {
             if (image_pointer < num_files - 1) image_pointer++;
             if (filesList[image_pointer].trim().length > 0) {
@@ -142,6 +152,9 @@
 <a class="button" id="but_right">
     <i class="icon-arrow-right"></i>
 </a>
+<a class="button" id="but_usethis">
+    <i class="icon-arrow-down"></i>
+</a>
 <a class="button" id="but_delete">
     <i class="icon-remove"></i>
 </a>
@@ -168,3 +181,20 @@
 <div id="responds"></div>
 
 <hr> <!-- Form Upload Ends Here -->
+<h2>Create NuForm</h2>
+
+<form id="NuformCreate">
+    <label for="formtype">Select Form Type. General forms are patient independent.</label>
+    <select id="formtype">
+        <option value="general">General</option>
+        <option value="patient">Patient Specific</option>
+    </select><br>
+    <label for="backgroundImage">Choose / Upload Form above.</label>
+    <input id="backgroundImage" value="" disabled/>
+    <label for="nuform-comments">Comments</label>
+    <textarea id="nuform-comments"></textarea><br>
+    <button type="submit" id="nuform-create">Create NuForm</button>
+</form>
+
+<hr> <!-- Create NuForm Ends Here -->
+<h2>List of General Active NuForms</h2>

@@ -183,16 +183,16 @@
 <hr> <!-- Form Upload Ends Here -->
 <h2>Create NuForm</h2>
 
-<form id="NuformCreate">
+<form id="NuformCreate" method="post" action="${ui.pageLink("nuform", "nuformDashboard")}">
     <label for="formtype">Select Form Type. General forms are patient independent.</label>
-    <select id="formtype">
+    <select name="formtype" id="formtype">
         <option value="general">General</option>
         <option value="patient">Patient Specific</option>
     </select><br>
     <label for="backgroundImage">Choose / Upload Form above.</label>
-    <input id="backgroundImage" value="" disabled/>
+    <input name="backgroundImage" id="backgroundImage" value="" disabled/>
     <label for="nuform-comments">Comments</label>
-    <textarea id="nuform-comments"></textarea><br>
+    <textarea name="comment" id="nuform-comments"></textarea><br>
     <button type="submit" id="nuform-create">Create NuForm</button>
 </form>
 

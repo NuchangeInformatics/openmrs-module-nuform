@@ -3,7 +3,6 @@ package org.openmrs.module.nuform.page.controller;
 import org.apache.commons.io.FileUtils;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.appui.UiSessionContext;
 import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
@@ -27,8 +26,7 @@ import java.util.Calendar;
  */
 public class NuformDashboardPageController {
 
-    public void controller(UiSessionContext sessionContext,
-                           //@SpringBean NuformService nuformService,
+    public void controller(@SpringBean NuformService nuformService,
                            PageModel model) throws EvaluationException, IOException {
         String sep = File.separator;
         // Folder in which images are saved
@@ -44,7 +42,7 @@ public class NuformDashboardPageController {
         model.addAttribute("numberOfFiles", fileNames.size());
         model.addAttribute("MESSAGE_SUCCESS", NuformConstants.SUCCESS);
         model.addAttribute("MESSAGE_ERROR", NuformConstants.ERROR);
-        //model.addAttribute("nuforms", nuformService.getAllNuforms(NuformConstants.ACTIVE));
+        model.addAttribute("nuforms", nuformService.getAllNuforms(NuformConstants.ACTIVE));
     }
 
     public String post(@RequestParam("formtype") String formtype,
@@ -52,7 +50,6 @@ public class NuformDashboardPageController {
                        @RequestParam("comment") String comment,
                        @SpringBean NuformService nuformService,
                        Errors errors,
-                       UiSessionContext sessionContext,
                        UiUtils ui) {
 
         NuformDef nuformDef = new NuformDef();

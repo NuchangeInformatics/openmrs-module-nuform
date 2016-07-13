@@ -8,7 +8,6 @@ import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
-import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.util.OpenmrsUtil;
 import org.springframework.expression.EvaluationException;
@@ -26,9 +25,9 @@ import java.util.Calendar;
  */
 public class NuformDashboardPageController {
 
-    public void controller(@SpringBean NuformService nuformService,
-                           PageModel model) throws EvaluationException, IOException {
+    public void controller(PageModel model) throws EvaluationException, IOException {
         String sep = File.separator;
+        NuformService nuformService = Context.getService(NuformService.class);
         // Folder in which images are saved
         File imgDir = new File(OpenmrsUtil.getApplicationDataDirectory() +
                 sep + "nuform" + sep);
@@ -48,7 +47,6 @@ public class NuformDashboardPageController {
     public String post(@RequestParam("formtype") String formtype,
                        @RequestParam("backgroundImage") String backgroundImage,
                        @RequestParam("comment") String comment,
-                       @SpringBean NuformService nuformService,
                        Errors errors,
                        UiUtils ui) {
 
@@ -61,7 +59,7 @@ public class NuformDashboardPageController {
         nuformDef.setBackgroundImage(backgroundImage);
         nuformDef.setStatus(NuformConstants.ACTIVE);
         nuformDef.setComments(comment);
-        //NuformService nuformService = Context.getService(NuformService.class);
+        NuformService nuformService = Context.getService(NuformService.class);
         NuformDef saved = nuformService.saveNuformDef(nuformDef);
         SimpleObject redirectParams = new SimpleObject();
         if (saved.getId() != null)

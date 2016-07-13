@@ -103,9 +103,6 @@
             }
         });
 
-        jq("#nuform-create").click(function (e) {
-            e.preventDefault();
-        });
 
         jq("#but_right").click(function (e) {
             if (image_pointer < num_files - 1) image_pointer++;
@@ -190,7 +187,7 @@
         <option value="patient">Patient Specific</option>
     </select><br>
     <label for="backgroundImage">Choose / Upload Form above.</label>
-    <input name="backgroundImage" id="backgroundImage" value="" disabled/>
+    <input name="backgroundImage" id="backgroundImage" type="text"/>
     <label for="nuform-comments">Comments</label>
     <textarea name="comment" id="nuform-comments"></textarea><br>
     <button type="submit" id="nuform-create">Create NuForm</button>

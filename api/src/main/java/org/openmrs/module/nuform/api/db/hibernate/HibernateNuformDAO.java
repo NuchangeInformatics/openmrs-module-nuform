@@ -52,7 +52,7 @@ public class HibernateNuformDAO implements NuformDAO {
                     .list();
         return sessionFactory.getCurrentSession()
                 .createCriteria(NuformDef.class)
-                .add(Restrictions.ne("status", status))
+                .add(Restrictions.eq("status", status))
                 .list();
 
     }

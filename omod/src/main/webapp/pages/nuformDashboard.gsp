@@ -195,3 +195,4 @@
 
 <hr> <!-- Create NuForm Ends Here -->
 <h2>List of General Active NuForms</h2>
+${nuformdefs}

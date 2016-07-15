@@ -38,7 +38,7 @@ public class NuformDashboardPageControllerTest extends BaseModuleWebContextSensi
         assertTrue(mav.containsKey("folder"));
         assertTrue(mav.containsKey("listOfFiles"));
         assertTrue(mav.containsKey("numberOfFiles"));
-        assertTrue(mav.containsKey("nuforms"));
+        assertTrue(mav.containsKey("nuformdefs"));
 
     }
 

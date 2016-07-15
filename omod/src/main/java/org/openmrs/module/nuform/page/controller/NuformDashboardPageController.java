@@ -41,7 +41,7 @@ public class NuformDashboardPageController {
         model.addAttribute("numberOfFiles", fileNames.size());
         model.addAttribute("MESSAGE_SUCCESS", NuformConstants.SUCCESS);
         model.addAttribute("MESSAGE_ERROR", NuformConstants.ERROR);
-        model.addAttribute("nuforms", nuformService.getAllNuforms(NuformConstants.ACTIVE));
+        model.addAttribute("nuformdefs", nuformService.getAllDef(NuformConstants.ACTIVE));
     }
 
     public String post(@RequestParam("formtype") String formtype,

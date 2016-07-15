@@ -43,23 +43,13 @@ public class NuformServiceImpl extends BaseOpenmrsService implements NuformServi
     }
 
     @Override
-    public List getAllDefWithDeleted() {
-        return dao.getAllDefWithDeleted();
+    public List getAllDef(String status) {
+        return dao.getAllDef(status);
     }
 
     @Override
-    public List getAllDef() {
-        return dao.getAllDef();
-    }
-
-    @Override
-    public List getAllNuformsWithDeleted() {
-        return dao.getAllNuformsWithDeleted();
-    }
-
-    @Override
-    public List getAllNuforms() {
-        return dao.getAllNuforms();
+    public List getAllNuforms(String status) {
+        return dao.getAllNuforms(status);
     }
 
     @Override

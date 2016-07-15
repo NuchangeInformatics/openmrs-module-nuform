@@ -34,16 +34,10 @@ public interface NuformService extends OpenmrsService {
 	 * 
 	 */
     @Transactional(readOnly = true)
-    List<NuformDef> getAllDef();
+    List<NuformDef> getAllDef(String status);
 
     @Transactional(readOnly = true)
-    List getAllDefWithDeleted();
-
-    @Transactional(readOnly = true)
-    List<Nuform> getAllNuforms();
-
-    @Transactional(readOnly = true)
-    List<Nuform> getAllNuformsWithDeleted();
+    List<Nuform> getAllNuforms(String status);
 
     @Transactional(readOnly = true)
     Nuform getNuformById(int id);

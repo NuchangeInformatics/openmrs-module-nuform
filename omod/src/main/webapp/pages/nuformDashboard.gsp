@@ -214,7 +214,10 @@
         <td>${it.created_on}</td>
         <td>${it.formtype}</td>
         <td>
-            <i class="icon-pencil edit-action" title="Create"></i>
+            <a href="${ui.pageLink("nuform", "nuform",
+                    [nuformId: 0, patientId: 0, nuformDefId: it.id])}">
+                <i class="icon-pencil edit-action" title="Create"></i>
+            </a>
             <i class="icon-eye-open view-action" title="View"></i>
             <i class="icon-remove delete-action" title="Delete"></i>
         </td>

@@ -21,10 +21,12 @@ public class NuformPageController {
     public void get(@RequestParam("nuformId") int nuformId,
                     @RequestParam("nuformDefId") int nuformDefId,
                     @RequestParam("patientId") int patientId,
-                    @RequestParam("lesionmap") String lesionmap,
+                    @RequestParam(required = false, value = "lesionmap") String lesionmap,
                     PageModel model) {
         NuformService nuformService = Context.getService(NuformService.class);
         String backgroundImage = nuformService.getNuformDefById(nuformDefId).getBackgroundImage();
+        if (lesionmap.isEmpty() && nuformId > 0)
+            lesionmap = nuformService.getNuformById(nuformId).getLesionmap();
         model.addAttribute("nuformId", nuformId);
         model.addAttribute("nuformDefId", nuformDefId);
         model.addAttribute("patientId", patientId);

@@ -1,9 +1,11 @@
 <%
     ui.decorateWith("appui", "standardEmrPage")
 
-    ui.includeJavascript("nuform", "main.bundle.js")
     ui.includeJavascript("nuform", "polyfills.bundle.js")
     ui.includeJavascript("nuform", "vendor.bundle.js")
+    //Main has to be loaded after the other two
+    //Otherwise it will lead to webpackJsonp is not defined
+    ui.includeJavascript("nuform", "main.bundle.js")
 
     ui.includeJavascript("uicommons", "angular.js")
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")

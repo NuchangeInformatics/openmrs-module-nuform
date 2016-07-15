@@ -195,4 +195,30 @@
 
 <hr> <!-- Create NuForm Ends Here -->
 <h2>List of General Active NuForms</h2>
-${nuformdefs}
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Form Image</th>
+        <th>Created On</th>
+        <th>Type <br>(1=General,<br> 2=Patient)</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% nuformdefs.each { %>
+    <tr>
+        <td>${it.id}</td>
+        <td>${it.backgroundImage}</td>
+        <td>${it.created_on}</td>
+        <td>${it.formtype}</td>
+        <td>
+            <i class="icon-pencil edit-action" title="Create"></i>
+            <i class="icon-eye-open view-action" title="View"></i>
+            <i class="icon-remove delete-action" title="Delete"></i>
+        </td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>

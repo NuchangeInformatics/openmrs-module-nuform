@@ -68,25 +68,4 @@ public class NuformDashboardPageController {
         return "redirect:" + ui.pageLink("nuform", "nuformDashboard", redirectParams);
     }
 
-    public String deleteDef(@RequestParam("nuformDefId") int nuformDefId,
-                            Errors errors,
-                            UiUtils ui) {
-
-        User user = Context.getAuthenticatedUser();
-        Calendar cal = Calendar.getInstance();
-        NuformService nuformService = Context.getService(NuformService.class);
-        NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
-        nuformDef.setStatus(NuformConstants.DELETED);
-        nuformDef.setDeleted_by(user.toString());
-        nuformDef.setDeleted_on(cal.getTime());
-
-        NuformDef saved = nuformService.saveNuformDef(nuformDef);
-
-        SimpleObject redirectParams = new SimpleObject();
-        if (saved.getId() != null)
-            redirectParams.put("savedId", saved.getId());
-        else
-            redirectParams.put("savedId", 0);
-        return "redirect:" + ui.pageLink("nuform", "nuformDashboard", redirectParams);
-    }
 }

@@ -39,14 +39,13 @@ public class NuformDashboardPageController {
         model.addAttribute("folder", imgDir);
         model.addAttribute("listOfFiles", fileNames);
         model.addAttribute("numberOfFiles", fileNames.size());
-        model.addAttribute("MESSAGE_SUCCESS", NuformConstants.SUCCESS);
-        model.addAttribute("MESSAGE_ERROR", NuformConstants.ERROR);
+        model.addAttribute("NUFORM_CONSTANTS", NuformConstants.NUFORM_CONSTANTS());
         model.addAttribute("nuformdefs", nuformService.getAllDef(NuformConstants.ACTIVE));
     }
 
     public String post(@RequestParam("formtype") String formtype,
                        @RequestParam("backgroundImage") String backgroundImage,
-                       @RequestParam("comment") String comment,
+                       @RequestParam(required = false, value = "comment", defaultValue = "") String comment,
                        Errors errors,
                        UiUtils ui) {
 

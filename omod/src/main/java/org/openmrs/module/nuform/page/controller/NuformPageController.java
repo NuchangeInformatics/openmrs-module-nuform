@@ -18,10 +18,10 @@ import java.util.Calendar;
  */
 public class NuformPageController {
 
-    public void get(@RequestParam("nuformId") int nuformId,
+    public void get(@RequestParam(required = false, value = "nuformId", defaultValue = "0") int nuformId,
                     @RequestParam("nuformDefId") int nuformDefId,
-                    @RequestParam("patientId") int patientId,
-                    @RequestParam(required = false, value = "lesionmap") String lesionmap,
+                    @RequestParam(required = false, value = "patientId", defaultValue = "0") int patientId,
+                    @RequestParam(required = false, value = "lesionmap", defaultValue = "") String lesionmap,
                     PageModel model) {
         NuformService nuformService = Context.getService(NuformService.class);
         String backgroundImage = nuformService.getNuformDefById(nuformDefId).getBackgroundImage();
@@ -35,20 +35,18 @@ public class NuformPageController {
 
     }
 
-    public String post(@RequestParam("nuformId") int nuformId,
+    public String post(@RequestParam(required = false, value = "nuformId", defaultValue = "0") int nuformId,
                        @RequestParam("nuformDefId") int nuformDefId,
-                       @RequestParam("patientId") String patientId,
-                       @RequestParam("lesionmap") String lesionmap,
+                       @RequestParam(required = false, value = "patientId", defaultValue = "0") String patientId,
+                       @RequestParam(required = false, value = "lesionmap", defaultValue = "") String lesionmap,
                        Errors errors,
                        UiUtils ui) {
 
         User user = Context.getAuthenticatedUser();
         Calendar cal = Calendar.getInstance();
         NuformService nuformService = Context.getService(NuformService.class);
-        NuformDef nuformDef = new NuformDef();
+        NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
         Nuform nuform;
-        if (nuformDefId > 0)
-            nuformDef = nuformService.getNuformDefById(nuformDefId);
         if (nuformId > 0) {
             nuform = nuformService.getNuformById(nuformId);
             nuform.setLast_edited_by(user.toString());
@@ -58,6 +56,7 @@ public class NuformPageController {
             nuform.setCreated_by(user.toString());
             nuform.setCreated_on(cal.getTime());
         }
+        nuform.setNuformDef(nuformDef);
         nuform.setPatientId(patientId);
         nuform.setLesionmap(lesionmap);
         Nuform saved = nuformService.saveNuform(nuform);

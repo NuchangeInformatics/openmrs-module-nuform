@@ -121,7 +121,7 @@
                         image: (filesList[image_pointer]).trim()
                     },
                     function (data) {
-                        if (data.indexOf("${MESSAGE_SUCCESS}") >= 0) {
+                        if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
                             jq().toastmessage('showSuccessToast', "Image Deleted.");
                             location.reload();
                         } else {
@@ -183,8 +183,8 @@
 <form id="NuformCreate" method="post" action="${ui.pageLink("nuform", "nuformDashboard")}">
     <label for="formtype">Select Form Type. General forms are patient independent.</label>
     <select name="formtype" id="formtype">
-        <option value="general">General</option>
-        <option value="patient">Patient Specific</option>
+        <option value="${NUFORM_CONSTANTS.GENERALFORM}">General</option>
+        <option value="${NUFORM_CONSTANTS.PATIENTFORM}">Patient Specific</option>
     </select><br>
     <label for="backgroundImage">Choose / Upload Form above.</label>
     <input name="backgroundImage" id="backgroundImage" type="text"/>
@@ -199,9 +199,9 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Form Image</th>
+        <th>Form Image (Comments)</th>
         <th>Created On</th>
-        <th>Type <br>(1=General,<br> 2=Patient)</th>
+        <th>Type <br>(${NUFORM_CONSTANTS.GENERAL}=General,<br> ${NUFORM_CONSTANTS.PATIENT}=Patient)</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -210,12 +210,11 @@
     <% nuformdefs.each { %>
     <tr>
         <td>${it.id}</td>
-        <td>${it.backgroundImage}</td>
+        <td>${it.backgroundImage} (${it.comments})</td>
         <td>${it.created_on}</td>
         <td>${it.formtype}</td>
         <td>
-            <a href="${ui.pageLink("nuform", "nuform",
-                    [nuformId: 0, patientId: 0, nuformDefId: it.id])}">
+            <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
                 <i class="icon-pencil edit-action" title="Create"></i>
             </a>
             <i class="icon-eye-open view-action" title="View"></i>

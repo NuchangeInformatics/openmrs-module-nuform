@@ -174,8 +174,8 @@
 </form>
 
 <hr> <!-- Create NuForm Ends Here -->
-<h2>List of General Active NuForms</h2>
-<table>
+<h2>List of General (Patient Independent) NuForms</h2>
+<table class="nuformTable">
     <thead>
     <tr>
         <th>ID</th>
@@ -188,11 +188,12 @@
     <tbody>
 
     <% nuformdefs.each { %>
-    <tr>
+    <tr<% if (it.status != NUFORM_CONSTANTS.ACTIVE) { %> class="inactive" <% } %>>
         <td>${it.id}</td>
         <td>${it.backgroundImage} (${it.comments})</td>
         <td>${it.created_on}</td>
         <td>${it.formtype}</td>
+        <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
         <td>
             <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
                 <i class="icon-pencil edit-action" title="Create"></i>
@@ -203,7 +204,13 @@
             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
                 <i class="icon-remove delete-action" title="Delete"></i>
             </a>
-        </td>
+            <% } else { %>
+        <td>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
+                <i class="icon-undo delete-action" title="UnDelete"></i>
+            </a>
+
+            <% } %></td>
     </tr>
     <% } %>
     </tbody>

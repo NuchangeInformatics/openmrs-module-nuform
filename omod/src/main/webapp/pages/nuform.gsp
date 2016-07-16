@@ -27,7 +27,19 @@
         'nuform_in': '${lesionmap}',
         'nuform_out': ''
     };
+    // Ref Stackoverflow: 1224463
+    var intervalID = setInterval(function () {
 
+        if (NUFORM.nuform_out.length > 500) {
+            jQuery('#saveMessase').empty();
+            jQuery('#saveMessase').append('<h4>Saved! Submit to transfer this to database.</h4>' + 'Buffer: ' + NUFORM.nuform_out.length);
+
+        } else {
+            jQuery('#saveMessase').empty();
+            jQuery('#saveMessase').append('<h4>Please save your work before submitting.</h4>' + 'Buffer: ' + NUFORM.nuform_out.length);
+        }
+
+    }, 5000);
     function saveNuform() {
         var imagemap = NUFORM.nuform_out;
         imagemap = imagemap.replace(/\"/g, '!');
@@ -43,6 +55,7 @@
     Loading...
 </nuform-app>
 
+<div id="saveMessase"></div>
 <form onsubmit="return saveNuform()" method="post" action="${ui.pageLink("nuform", "nuform")}" name="FormName"
       id="FormName">
 

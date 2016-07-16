@@ -218,7 +218,9 @@
                 <i class="icon-pencil edit-action" title="Create"></i>
             </a>
             <i class="icon-eye-open view-action" title="View"></i>
-            <i class="icon-remove delete-action" title="Delete"></i>
+            <a href="${ui.pageLink("nuform", "nuformDashboard", "deleteDef", [nuformDefId: it.id])}">
+                <i class="icon-remove delete-action" title="Delete"></i>
+            </a>
         </td>
     </tr>
     <% } %>

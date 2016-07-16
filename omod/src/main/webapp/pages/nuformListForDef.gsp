@@ -36,7 +36,7 @@
         <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
         <td>
             <a href="${
-                    ui.pageLink("nuform", "nuform", [lesionmap: it.lesionmap, patientId: it.patientId, nuformId: it.id, nuformDefId: nuformDefId])}">
+                    ui.pageLink("nuform", "nuform", [patientId: it.patientId, nuformId: it.id, nuformDefId: nuformDefId])}">
                 <i class="icon-pencil edit-action" title="Edit"></i>
             </a>
             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleNuform", [nuformId: it.id])}">

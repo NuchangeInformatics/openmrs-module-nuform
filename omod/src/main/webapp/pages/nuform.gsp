@@ -24,7 +24,7 @@
         'image': '../moduleServlet/nuform/NuformImageServlet?image=${backgroundImage}',
         'width': 640,
         'height': 830,
-        'nuform_in': '${lesionmap}',
+        'nuform_in': '',
         'nuform_out': ''
     };
     // Ref Stackoverflow: 1224463
@@ -40,6 +40,7 @@
         }
 
     }, 5000);
+
     function saveNuform() {
         var imagemap = NUFORM.nuform_out;
         imagemap = imagemap.replace(/\"/g, '!');
@@ -49,6 +50,13 @@
         console.log(imagemap);
         return true;
     }
+
+    jQuery(document).ready(function () {
+        response = jQuery("#lesionmap").val();
+        response = response.replace(/!/g, '"');
+        NUFORM.nuform_in = response;
+        console.log(response);
+    });
 </script>
 
 <nuform-app>
@@ -59,8 +67,8 @@
 <form onsubmit="return saveNuform()" method="post" action="${ui.pageLink("nuform", "nuform")}" name="FormName"
       id="FormName">
 
-    <input name="lesionmap" id="lesionmap" type="hidden" value="">
-    <input name="nuformid" id="nuformId" type="hidden" value="${nuformId}">
+    <input name="lesionmap" id="lesionmap" type="hidden" value="${lesionmap}">
+    <input name="nuformId" id="nuformId" type="hidden" value="${nuformId}">
     <input name="patientId" id="patientId" type="hidden" value="${patientId}">
     <input name="nuformDefId" id="nuformDefId" type="hidden" value="${nuformDefId}">
 

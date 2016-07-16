@@ -25,8 +25,10 @@ public class NuformPageController {
                     PageModel model) {
         NuformService nuformService = Context.getService(NuformService.class);
         String backgroundImage = nuformService.getNuformDefById(nuformDefId).getBackgroundImage();
-        if (lesionmap.isEmpty() && nuformId > 0)
+        if (nuformId > 0)
             lesionmap = nuformService.getNuformById(nuformId).getLesionmap();
+        else
+            lesionmap = "";
         model.addAttribute("nuformId", nuformId);
         model.addAttribute("nuformDefId", nuformDefId);
         model.addAttribute("patientId", patientId);

@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.openmrs.Patient;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.db.NuformDAO;
@@ -74,6 +75,14 @@ public class HibernateNuformDAO implements NuformDAO {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Nuform.class)
                 .add(Restrictions.eq("nuformDef", nuformDef))
+                .list();
+    }
+
+    @Override
+    public List getAllNuformsByPatient(Patient patient) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("patient", patient))
                 .list();
     }
 

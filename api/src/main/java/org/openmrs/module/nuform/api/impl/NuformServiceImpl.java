@@ -11,6 +11,7 @@ package org.openmrs.module.nuform.api.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Patient;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformDef;
@@ -55,6 +56,11 @@ public class NuformServiceImpl extends BaseOpenmrsService implements NuformServi
     @Override
     public List getAllNuformsByDef(NuformDef nuformDef) {
         return dao.getAllNuformsByDef(nuformDef);
+    }
+
+    @Override
+    public List getAllNuformsByPatient(Patient patient) {
+        return dao.getAllNuformsByPatient(patient);
     }
 
     @Override

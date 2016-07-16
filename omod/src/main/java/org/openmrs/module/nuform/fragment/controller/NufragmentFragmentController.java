@@ -4,10 +4,14 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.openmrs.Patient;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.api.NuformService;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
+
+import java.util.List;
 
 /**
  * Created by beapen on 11/07/16.
@@ -27,7 +31,9 @@ public class NufragmentFragmentController {
         else
             patient = (Patient) (pt instanceof Patient ? pt : PropertyUtils.getProperty(pt, "patient"));
         NuformService nuformService = Context.getService(NuformService.class);
-
-
+        List<Nuform> nuforms = nuformService.getAllNuformsByPatient(patient);
+        model.addAttribute("NUFORM_CONSTANTS", NuformConstants.NUFORM_CONSTANTS());
+        model.addAttribute("nuforms", nuforms);
+        model.addAttribute("patient", patient);
     }
 }

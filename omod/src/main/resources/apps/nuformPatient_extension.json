@@ -1,0 +1,11 @@
+[
+  {
+    // adds nuform section to patient dashboard
+    "id": "nuform.patient.dashboard",
+    "extensionPointId": "patientDashboard.secondColumnFragments",
+    "extensionParams": {
+      "provider": "nuform",
+      "fragment": "nufragment"
+    }
+  }
+]

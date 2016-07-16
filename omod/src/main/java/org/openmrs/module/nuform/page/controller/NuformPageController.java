@@ -1,6 +1,8 @@
 package org.openmrs.module.nuform.page.controller;
 
+import org.openmrs.Patient;
 import org.openmrs.User;
+import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformDef;
@@ -39,7 +41,7 @@ public class NuformPageController {
 
     public String post(@RequestParam(required = false, value = "nuformId", defaultValue = "0") int nuformId,
                        @RequestParam("nuformDefId") int nuformDefId,
-                       @RequestParam(required = false, value = "patientId", defaultValue = "0") String patientId,
+                       @RequestParam(required = false, value = "patientId", defaultValue = "0") int patientId,
                        @RequestParam(required = false, value = "lesionmap", defaultValue = "") String lesionmap,
                        Errors errors,
                        UiUtils ui) {
@@ -47,6 +49,12 @@ public class NuformPageController {
         User user = Context.getAuthenticatedUser();
         Calendar cal = Calendar.getInstance();
         NuformService nuformService = Context.getService(NuformService.class);
+        PatientService patientService = Context.getPatientService();
+        Patient patient;
+        if (patientId > 0)
+            patient = patientService.getPatient(patientId);
+        else
+            patient = null;
         NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
         Nuform nuform;
         if (nuformId > 0) {
@@ -59,7 +67,8 @@ public class NuformPageController {
             nuform.setCreated_on(cal.getTime());
         }
         nuform.setNuformDef(nuformDef);
-        nuform.setPatientId(patientId);
+
+        nuform.setPatient(patient);
         nuform.setLesionmap(lesionmap);
         Nuform saved = nuformService.saveNuform(nuform);
 

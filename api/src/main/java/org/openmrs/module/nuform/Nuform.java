@@ -11,6 +11,7 @@ package org.openmrs.module.nuform;
 
 import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.BaseOpenmrsObject;
+import org.openmrs.Patient;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,7 +37,7 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
     private Date deleted_on;
     private Date last_edited_on;
 
-    private String patientId;
+    private Patient patient;
     private String lesionmap;
     private String status = ACTIVE;
     private String comments;
@@ -99,12 +100,13 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
         this.last_edited_on = last_edited_on;
     }
 
-    public String getPatientId() {
-        return patientId;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public String getLesionmap() {

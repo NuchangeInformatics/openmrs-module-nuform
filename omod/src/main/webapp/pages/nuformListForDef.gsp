@@ -30,16 +30,22 @@
     </thead>
     <tbody>
 
-    <% nuforms.each { %>
+    <% nuforms.each {
+        if (!it.patient) {
+            patientId = null
+        } else {
+            patientId = it.patient.id
+        }
+    %>
     <tr<% if (it.status != NUFORM_CONSTANTS.ACTIVE) { %> class="inactive" <% } %>>
         <td>${it.id}</td>
         <td>${it.last_edited_on}</td>
         <td>${it.created_on}</td>
-        <td>${it.patientId}</td>
+        <td>${patientId}</td>
         <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
         <td>
             <a href="${
-                    ui.pageLink("nuform", "nuform", [patientId: it.patientId, nuformId: it.id, nuformDefId: nuformDefId])}">
+                    ui.pageLink("nuform", "nuform", [patientId: patientId, nuformId: it.id, nuformDefId: nuformDefId])}">
                 <i class="icon-pencil edit-action" title="Edit"></i>
             </a>
             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleNuform", [nuformId: it.id])}">

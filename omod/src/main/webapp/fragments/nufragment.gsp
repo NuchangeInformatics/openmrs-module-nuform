@@ -19,7 +19,7 @@
                         note: obs
                     },
                     function (data) {
-                        if (data.indexOf("${MESSAGE_SUCCESS}") >= 0) {
+                        if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
                             jq().toastmessage('showSuccessToast', "Visit Note Added");
                         } else {
                             jq().toastmessage('showErrorToast', "Error");
@@ -61,7 +61,7 @@
         <!-- Title Ends here -->
 
         <div id="nuform-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-            <div><a class="info-body">
+            <div>
 
             </div>
         </div>
@@ -70,13 +70,8 @@
         <!-- Footer Below-->
 
         <div id="annotation-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-            <p>
-            </p>
 
-            <p>
                 Annotation
-            </p>
-        </small>
 
         </div>
 

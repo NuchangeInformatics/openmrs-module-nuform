@@ -11,7 +11,7 @@ public class NuformConstants {
     public final static String ACTIVE = "1";
     public final static String DELETED = "0";
     // Patient associated images for annotation. Not to be listed.
-    public final static String PERSONAL = "2";
+    public final static String PERSONAL = "3";
     public final static String SUCCESS = "success";
     public final static String ERROR = "error";
 

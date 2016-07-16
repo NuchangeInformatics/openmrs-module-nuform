@@ -3,6 +3,7 @@ package org.openmrs.module.nuform.fragment.controller;
 import org.openmrs.User;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
@@ -26,7 +27,7 @@ public class NuformUtilsFragmentController {
 
     }
 
-    public void deleteDef(@RequestParam(value = "nuformDefId", required = true) int nuformDefId,
+    public void toggleDef(@RequestParam(value = "nuformDefId", required = true) int nuformDefId,
                           Errors errors,
                           UiUtils ui) {
 
@@ -34,17 +35,32 @@ public class NuformUtilsFragmentController {
         Calendar cal = Calendar.getInstance();
         NuformService nuformService = Context.getService(NuformService.class);
         NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
-        nuformDef.setStatus(NuformConstants.DELETED);
-        nuformDef.setDeleted_by(user.toString());
-        nuformDef.setDeleted_on(cal.getTime());
+        if (nuformDef.getStatus() == NuformConstants.ACTIVE) {
+            nuformDef.setStatus(NuformConstants.DELETED);
+            nuformDef.setDeleted_by(user.toString());
+            nuformDef.setDeleted_on(cal.getTime());
+        } else
+            nuformDef.setStatus(NuformConstants.ACTIVE);
 
         NuformDef saved = nuformService.saveNuformDef(nuformDef);
-/*
-        SimpleObject redirectParams = new SimpleObject();
-        if (saved.getId() != null)
-            redirectParams.put("savedId", saved.getId());
+    }
+
+    public void toggleNuform(@RequestParam(value = "nuformId", required = true) int nuformId,
+                             Errors errors,
+                             UiUtils ui) {
+
+        User user = Context.getAuthenticatedUser();
+        Calendar cal = Calendar.getInstance();
+        NuformService nuformService = Context.getService(NuformService.class);
+        Nuform nuform = nuformService.getNuformById(nuformId);
+        if (nuform.getStatus() == NuformConstants.ACTIVE) {
+            nuform.setStatus(NuformConstants.DELETED);
+            nuform.setDeleted_by(user.toString());
+            nuform.setDeleted_on(cal.getTime());
+        }
         else
-            redirectParams.put("savedId", 0);
-        return "redirect:" + ui.pageLink("nuform", "nuformDashboard", redirectParams);*/
+            nuform.setStatus(NuformConstants.ACTIVE);
+
+        Nuform saved = nuformService.saveNuform(nuform);
     }
 }

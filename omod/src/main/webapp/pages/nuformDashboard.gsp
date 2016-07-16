@@ -217,9 +217,10 @@
             <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
                 <i class="icon-pencil edit-action" title="Create"></i>
             </a>
-            <i class="icon-eye-open view-action" title="View"></i>
-            <a class="button" method="post"
-               href="${ui.actionLink("nuform", "nuformUtils", "deleteDef", [nuformDefId: it.id])}">
+            <a href="${ui.pageLink("nuform", "nuformListForDef", [nuformDefId: it.id])}">
+                <i class="icon-eye-open view-action" title="View"></i>
+            </a>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
                 <i class="icon-remove delete-action" title="Delete"></i>
             </a>
         </td>

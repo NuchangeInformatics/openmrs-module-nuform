@@ -6,6 +6,8 @@
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
 
+    ui.includeCss("nuform", "nuform.css")
+
 %>
 <script type="text/javascript">
     var breadcrumbs = [
@@ -14,8 +16,9 @@
     ]
 </script>
 
+
 <h2>List of Active NuForms</h2>
-<table>
+<table class="nuformTable">
     <thead>
     <tr>
         <th>ID</th>
@@ -28,7 +31,7 @@
     <tbody>
 
     <% nuforms.each { %>
-    <tr>
+    <tr<% if (it.status != NUFORM_CONSTANTS.ACTIVE) { %> class="inactive" <% } %>>
         <td>${it.id}</td>
         <td>${it.last_edited_on}</td>
         <td>${it.created_on}</td>
@@ -44,7 +47,7 @@
             </a>
 
             <% } else { %>
-        <td bgcolor="#a9a9a9">
+        <td>
             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleNuform", [nuformId: it.id])}">
                 <i class="icon-undo delete-action" title="UnDelete"></i>
             </a>

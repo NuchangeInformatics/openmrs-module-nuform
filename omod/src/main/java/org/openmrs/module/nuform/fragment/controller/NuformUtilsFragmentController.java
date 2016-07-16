@@ -35,7 +35,7 @@ public class NuformUtilsFragmentController {
         Calendar cal = Calendar.getInstance();
         NuformService nuformService = Context.getService(NuformService.class);
         NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
-        if (nuformDef.getStatus() == NuformConstants.ACTIVE) {
+        if (nuformDef.getStatus().equals(NuformConstants.ACTIVE)) {
             nuformDef.setStatus(NuformConstants.DELETED);
             nuformDef.setDeleted_by(user.toString());
             nuformDef.setDeleted_on(cal.getTime());
@@ -53,7 +53,7 @@ public class NuformUtilsFragmentController {
         Calendar cal = Calendar.getInstance();
         NuformService nuformService = Context.getService(NuformService.class);
         Nuform nuform = nuformService.getNuformById(nuformId);
-        if (nuform.getStatus() == NuformConstants.ACTIVE) {
+        if (nuform.getStatus().equals(NuformConstants.ACTIVE)) {
             nuform.setStatus(NuformConstants.DELETED);
             nuform.setDeleted_by(user.toString());
             nuform.setDeleted_on(cal.getTime());

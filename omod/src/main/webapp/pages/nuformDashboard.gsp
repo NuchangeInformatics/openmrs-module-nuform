@@ -6,6 +6,8 @@
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
 
+    ui.includeCss("nuform", "nuform.css")
+
 %>
 <script type="text/javascript">
     var breadcrumbs = [
@@ -13,29 +15,7 @@
         {label: "${ ui.escapeJs(ui.message("nuform.nuformDashboard.title")) }"}
     ]
 </script>
-<style type="text/css">
-#progressbox {
-    position: relative;
-    width: 400px;
-    border: 1px solid #ddd;
-    padding: 1px;
-    border-radius: 3px;
-}
 
-#progressbar {
-    background-color: lightblue;
-    width: 0%;
-    height: 20px;
-    border-radius: 4px;
-}
-
-#percent {
-    position: absolute;
-    display: inline-block;
-    top: 3px;
-    left: 48%;
-}
-</style>
 <script>
     var jq = jQuery;
     var image_pointer = 0;

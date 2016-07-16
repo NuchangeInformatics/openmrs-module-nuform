@@ -49,7 +49,7 @@
     <input name="lesionmap" id="lesionmap" type="hidden" value="">
     <input name="nuformid" id="nuformId" type="hidden" value="${nuformId}">
     <input name="patientId" id="patientId" type="hidden" value="${patientId}">
-    <input name="nuformDefId" id="nuformDefId" type="hidden" value="${NuformDefId}">
+    <input name="nuformDefId" id="nuformDefId" type="hidden" value="${nuformDefId}">
 
     <input value="Submit" name="SubmitButton" id="SubmitButton" type="submit">
 

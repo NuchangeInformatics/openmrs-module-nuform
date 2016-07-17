@@ -52,6 +52,11 @@
                 </a>
             </li>
             <li class="ui-state-default ui-corner-top">
+                <a href="#create-tab" class="ui-tabs-anchor">
+                    Create
+                </a>
+            </li>
+            <li class="ui-state-default ui-corner-top">
                 <a href="#annotation-tab" class="ui-tabs-anchor">
                     Annotate
                 </a>
@@ -113,7 +118,9 @@
         </div>
 
 
-        <!-- Footer Below-->
+        <div id="create-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+
+        </div>
 
         <div id="annotation-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 

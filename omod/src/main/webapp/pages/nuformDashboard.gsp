@@ -94,8 +94,7 @@
         });
 
         jq("#but_delete").click(function (e) {
-            //TODO: Delete function in fragment
-            jq.post("${ ui.actionLink("nuform","NuFormDashboardPageController","deleteImage")}", {
+            jq.post("${ ui.actionLink("nuform","nuformUtils","deleteImage")}", {
                         returnFormat: 'json',
                         type: "data",
                         image: (filesList[image_pointer]).trim()

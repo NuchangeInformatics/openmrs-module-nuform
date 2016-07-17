@@ -45,10 +45,14 @@ public interface NuformService extends OpenmrsService {
 
     Nuform saveNuform(Nuform nuform);
 
+    void purgeNuform(Nuform nuform);
+
     @Transactional(readOnly = true)
     NuformDef getNuformDefById(int id);
 
     NuformDef saveNuformDef(NuformDef nuformDef);
+
+    void purgeNuformDef(NuformDef nuformDef);
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuformsByDef(NuformDef nuformDef);

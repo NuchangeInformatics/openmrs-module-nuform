@@ -79,8 +79,17 @@ public class NuformServiceImpl extends BaseOpenmrsService implements NuformServi
     }
 
     @Override
+    public void purgeNuform(Nuform nuform) {
+        dao.purgeNuform(nuform);
+    }
+
+    @Override
     public NuformDef saveNuformDef(NuformDef nuformDef) {
         return dao.saveNuformDef(nuformDef);
     }
 
+    @Override
+    public void purgeNuformDef(NuformDef nuformDef) {
+        dao.purgeNuformDef(nuformDef);
+    }
 }

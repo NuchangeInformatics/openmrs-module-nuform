@@ -7,13 +7,16 @@ import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
+import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
+import org.openmrs.util.OpenmrsUtil;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.util.Calendar;
 
 /**
@@ -62,5 +65,36 @@ public class NuformUtilsFragmentController {
             nuform.setStatus(NuformConstants.ACTIVE);
 
         Nuform saved = nuformService.saveNuform(nuform);
+    }
+
+
+    public void purgeDef(@RequestParam(value = "nuformDefId", required = true) int nuformDefId,
+                         Errors errors,
+                         UiUtils ui) {
+        NuformService nuformService = Context.getService(NuformService.class);
+        NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
+        nuformService.purgeNuformDef(nuformDef);
+    }
+
+    public void purgeNuform(@RequestParam(value = "nuformId", required = true) int nuformId,
+                            Errors errors,
+                            UiUtils ui) {
+        NuformService nuformService = Context.getService(NuformService.class);
+        Nuform nuform = nuformService.getNuformById(nuformId);
+        nuformService.purgeNuform(nuform);
+    }
+
+    public Object deleteImage(@RequestParam("image") String image) {
+
+        SimpleObject output;
+        String sep = File.separator;
+        File toDelete = new File(OpenmrsUtil.getApplicationDataDirectory() +
+                sep + "nuform" + sep + image.trim());
+        if (toDelete.delete()) {
+            output = SimpleObject.create("message", NuformConstants.SUCCESS);
+        } else {
+            output = SimpleObject.create("message", NuformConstants.ERROR);
+        }
+        return output;
     }
 }

@@ -1,6 +1,5 @@
 <%
     ui.decorateWith("appui", "standardEmrPage")
-
     ui.includeJavascript("nuform", "jquery.form.js")
     ui.includeJavascript("uicommons", "angular.js")
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
@@ -23,7 +22,6 @@
     var filesList = "${listOfFiles}";
     var num_files = ${numberOfFiles};
 
-
     // File list
     filesList = filesList.slice(1, -1);
     filesList = filesList.split(",");
@@ -31,6 +29,33 @@
 
     jq(document).ready(function () {
 
+        var confirmDeleteController = emr.setupConfirmationDialog({
+            selector: '#confirmDeletePopup',
+            actions: {
+                cancel: function () {
+                    confirmDeleteController.close();
+                },
+                confirm: function () {
+                    confirmDeleteController.close();
+                    jq.post("${ ui.actionLink("nuform","nuformUtils","deleteImage")}", {
+                                returnFormat: 'json',
+                                type: "data",
+                                image: (filesList[image_pointer]).trim()
+                            },
+                            function (data) {
+                                if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
+                                    jq().toastmessage('showSuccessToast', "Image Deleted.");
+                                    location.reload();
+                                } else {
+                                    jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
+                                }
+                            })
+                            .error(function () {
+                                jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
+                            });
+                }
+            }
+        });
 
         // Form Upload progressbar begin
         // Ref: simplecodestuffs file-upload-with-progress-bar-using-jquery-in-servlet
@@ -66,6 +91,9 @@
         jq("#UploadForm").ajaxForm(options);
         //Form Upload progressbar end
 
+        // Show first image in buffer, else blank.
+        setTimeout('jq("#but_left").click()', 1000);
+        setTimeout('jq("#but_right").click()', 1200);
 
         jq("#but_left").click(function (e) {
             if (image_pointer > 0) image_pointer--;
@@ -94,23 +122,7 @@
         });
 
         jq("#but_delete").click(function (e) {
-            //TODO: Delete function in fragment
-            jq.post("${ ui.actionLink("nuform","NuFormDashboardPageController","deleteImage")}", {
-                        returnFormat: 'json',
-                        type: "data",
-                        image: (filesList[image_pointer]).trim()
-                    },
-                    function (data) {
-                        if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
-                            jq().toastmessage('showSuccessToast', "Image Deleted.");
-                            location.reload();
-                        } else {
-                            jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
-                        }
-                    })
-                    .error(function () {
-                        jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
-                    });
+            confirmDeleteController.show();
         });
 
     });
@@ -196,7 +208,7 @@
         <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
         <td>
             <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
-                <i class="icon-pencil edit-action" title="Create"></i>
+                <i class="icon-file-alt edit-action" title="Create"></i>
             </a>
             <a href="${ui.pageLink("nuform", "nuformListForDef", [nuformDefId: it.id])}">
                 <i class="icon-eye-open view-action" title="View"></i>
@@ -209,9 +221,26 @@
             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
                 <i class="icon-undo delete-action" title="UnDelete"></i>
             </a>
-
+            <a href="${ui.actionLink("nuform", "nuformUtils", "purgeDef", [nuformDefId: it.id])}">
+                <i class="icon-remove delete-action" title="Purge"></i>
+            </a>
             <% } %></td>
     </tr>
     <% } %>
     </tbody>
 </table>
+
+<div id="confirmDeletePopup" class="dialog" style="display: none">
+    <div class="dialog-header">
+        <i class="icon-remove"></i>
+
+        <h3>${ui.message("nuform.delete.confirm")}</h3>
+    </div>
+
+    <div class="dialog-content">
+        <p class="dialog-instructions">${ui.message("nuform.delete.explanation")}</p>
+
+        <button class="confirm">${ui.message("referenceapplication.okay")}</button>
+        <button class="cancel">${ui.message("nuform.delete.cancel")}</button>
+    </div>
+</div>

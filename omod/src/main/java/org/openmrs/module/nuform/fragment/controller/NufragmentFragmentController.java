@@ -35,5 +35,6 @@ public class NufragmentFragmentController {
         model.addAttribute("NUFORM_CONSTANTS", NuformConstants.NUFORM_CONSTANTS());
         model.addAttribute("nuforms", nuforms);
         model.addAttribute("patient", patient);
+        model.addAttribute("nuformdefs", nuformService.getAllDef(NuformConstants.PATIENTFORM));
     }
 }

@@ -40,7 +40,7 @@ public class NuformDashboardPageController {
         model.addAttribute("listOfFiles", fileNames);
         model.addAttribute("numberOfFiles", fileNames.size());
         model.addAttribute("NUFORM_CONSTANTS", NuformConstants.NUFORM_CONSTANTS());
-        model.addAttribute("nuformdefs", nuformService.getAllDef(""));
+        model.addAttribute("nuformdefs", nuformService.getAllDef(NuformConstants.GENERALFORM));
     }
 
     public String post(@RequestParam("formtype") String formtype,

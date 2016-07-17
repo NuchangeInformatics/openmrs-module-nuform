@@ -6,34 +6,25 @@
     jq(document).ready(function () {
         jq("#tabs").tabs();
 
-        //##### Add Visit note when the submit button is clicked #########
-        jq(".add-visit-note").click(function (e) {
 
-            e.preventDefault();
+        var nu_folder = "../../moduleServlet/dermimage/DermImageServlet?patId=${patient.id}&image=";
+        var nu_filesList = "${listOfFiles}";
 
-            var patientid = ${ patient.id };
-            var conceptId = 162169;
-            var obs = jq(this).data('consult');
-            //obs = jq(obs).text();
-            jq.post('${ ui.actionLink("addVisitNote") }', {
-                        returnFormat: 'json',
-                        PatientId: patientid,
-                        conceptid: conceptId,
-                        note: obs
-                    },
-                    function (data) {
-                        if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
-                            jq().toastmessage('showSuccessToast', "Visit Note Added");
-                        } else {
-                            jq().toastmessage('showErrorToast', "Error");
-                        }
 
-                    })
-                    .error(function () {
-                        jq().toastmessage('showErrorToast', "Error");
-                    })
+        // File list
+        nu_filesList = nu_filesList.slice(1, -1);
+        nu_filesList = nu_filesList.split(",");
 
-        });
+        console.log(nu_filesList);
+        var image_select = document.getElementById("backgroundImage");
+        for (var i = 0; i < nu_filesList.length; i++) {
+            var opt = nu_filesList[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            image_select.appendChild(el);
+        }
+
 
     });
 </script>
@@ -67,7 +58,7 @@
         </ul>
 
         <!-- Title Ends here -->
-
+        <small>
         <div id="nuform-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
             <div>
                 <table class="nuformTable">
@@ -156,7 +147,18 @@
         <div id="annotation-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 
             <% if (dermimageStarted == NUFORM_CONSTANTS.SUCCESS) { %>
-            <h3>Started!</h3>
+
+            <form id="NuformCreate" method="post" action="${ui.pageLink("nuform", "nuformDashboard")}">
+                <input name="formtype" id="formtype" value="${NUFORM_CONSTANTS.PERSONALFORM}" type="hidden"/>
+
+                <label for="backgroundImage">Select Image:</label>
+                <select name="backgroundImage" id="backgroundImage">
+                </select><br>
+
+                <label for="nuform-comments">Comments</label>
+                <textarea name="comment" id="nuform-comments"></textarea><br>
+                <button type="submit" id="nuform-create">Create Annotation</button>
+            </form>
             <% } else { %>
             <h3>Failure :(</h3>
             <% } %>
@@ -164,6 +166,6 @@
 
 
         </div>
-
+        </small>
     </div> <!--tabs-->
 </div><!--nuclinic-main-->

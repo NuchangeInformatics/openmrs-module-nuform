@@ -17,7 +17,7 @@
 </script>
 
 
-<h2>List of Active NuForms</h2>
+<h2>List of NuForms</h2>
 <table class="nuformTable">
     <thead>
     <tr>

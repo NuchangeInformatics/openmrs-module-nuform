@@ -93,6 +93,9 @@
         jq("#UploadForm").ajaxForm(options);
         //Form Upload progressbar end
 
+        // Show first image in buffer, else blank.
+        setTimeout('jq("#but_left").click()', 1000);
+        setTimeout('jq("#but_right").click()', 1200);
 
         jq("#but_left").click(function (e) {
             if (image_pointer > 0) image_pointer--;

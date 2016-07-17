@@ -166,7 +166,8 @@
                 <button type="submit" id="nuform-create">Create Annotation</button>
             </form>
             <% } else { %>
-            <h3>Failure :(</h3>
+            <h3>Please install <b>Clinical Images</b> module (openmrs.module.dermimage) from
+            openMRS modules repository to use annotation.</h3>
             <% } %>
 
 

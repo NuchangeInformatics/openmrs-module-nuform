@@ -1,6 +1,5 @@
 <%
     ui.decorateWith("appui", "standardEmrPage")
-    ui.includeFragment("appui", "standardEmrIncludes")
     ui.includeJavascript("nuform", "jquery.form.js")
     ui.includeJavascript("uicommons", "angular.js")
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
@@ -8,7 +7,6 @@
 
     ui.includeCss("nuform", "nuform.css")
 
-    ui.includeFragment("referenceapplication", "infoAndErrorMessages")
 %>
 <script type="text/javascript">
     var breadcrumbs = [
@@ -124,9 +122,7 @@
         });
 
         jq("#but_delete").click(function (e) {
-            console.log("delete clicked!");
             confirmDeleteController.show();
-
         });
 
     });

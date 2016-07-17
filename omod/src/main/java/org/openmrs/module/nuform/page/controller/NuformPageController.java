@@ -86,6 +86,13 @@ public class NuformPageController {
             redirectParams.put("savedId", saved.getId());
         else
             redirectParams.put("savedId", 0);
+        if (patientId > 0) {
+            // If a patient specific form return to patient dashboard
+            redirectParams.put("patientId", patientId);
+            redirectParams.put("app", "pih.app.clinicianDashboard");
+            return "redirect:" + ui.pageLink("coreapps", "clinicianfacing/patient", redirectParams);
+        }
+        // Else return to Nuform dashboard
         return "redirect:" + ui.pageLink("nuform", "nuformDashboard", redirectParams);
     }
 }

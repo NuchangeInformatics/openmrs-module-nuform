@@ -44,8 +44,8 @@ public class NuformServiceImpl extends BaseOpenmrsService implements NuformServi
     }
 
     @Override
-    public List getAllDef(String status) {
-        return dao.getAllDef(status);
+    public List getAllDef(String formtype) {
+        return dao.getAllDef(formtype);
     }
 
     @Override

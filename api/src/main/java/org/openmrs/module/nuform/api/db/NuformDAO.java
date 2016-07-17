@@ -26,7 +26,7 @@ public interface NuformDAO {
 	 * Add DAO methods here
 	 */
     @Transactional(readOnly = true)
-    List<NuformDef> getAllDef(String status);
+    List<NuformDef> getAllDef(String formtype);
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuforms(String status);

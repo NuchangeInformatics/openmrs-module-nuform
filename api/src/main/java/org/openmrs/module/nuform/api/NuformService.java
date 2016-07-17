@@ -35,7 +35,7 @@ public interface NuformService extends OpenmrsService {
 	 * 
 	 */
     @Transactional(readOnly = true)
-    List<NuformDef> getAllDef(String status);
+    List<NuformDef> getAllDef(String formtype);
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuforms(String status);

@@ -48,7 +48,7 @@
         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
             <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active">
                 <a href="#nuform-tab" class="ui-tabs-anchor">
-                    Patient Forms
+                    Nuorms
                 </a>
             </li>
             <li class="ui-state-default ui-corner-top">
@@ -74,7 +74,6 @@
                         <th>ID</th>
                         <th>Last Edited On</th>
                         <th>Created On</th>
-                        <th>Patient ID</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -91,7 +90,6 @@
                         <td>${it.id}</td>
                         <td>${it.last_edited_on}</td>
                         <td>${it.created_on}</td>
-                        <td>${patientId}</td>
                         <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
                         <td>
                             <a href="${

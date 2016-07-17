@@ -49,6 +49,7 @@
         <many-to-one name="patient" column="patientId" class="org.openmrs.Patient"/>
         <property name="status" type="java.lang.String" column="status" length="1"/>
         <property name="lesionmap" type="java.lang.String" column="lesionmap"/>
+        <property name="backgroundImage" type="java.lang.String" column="backgroundImage"/>
         <property name="comments" type="java.lang.String" column="comments"/>
 
     </class>

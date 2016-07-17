@@ -46,14 +46,14 @@ public class HibernateNuformDAO implements NuformDAO {
     // REF: http://levelup.lishman.com/spring/hibernate-orm/quick-start.php
 
     @Override
-    public List getAllDef(String status) {
-        if (status.isEmpty())
+    public List getAllDef(String formtype) {
+        if (formtype.isEmpty())
             return sessionFactory.getCurrentSession()
                     .createCriteria(NuformDef.class)
                     .list();
         return sessionFactory.getCurrentSession()
                 .createCriteria(NuformDef.class)
-                .add(Restrictions.eq("status", status))
+                .add(Restrictions.eq("formtype", formtype))
                 .list();
 
     }

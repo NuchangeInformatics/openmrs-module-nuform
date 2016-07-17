@@ -39,6 +39,7 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
 
     private Patient patient;
     private String lesionmap;
+    private String backgroundImage;
     private String status = ACTIVE;
     private String comments;
 
@@ -115,6 +116,14 @@ public class Nuform extends BaseOpenmrsObject implements Serializable {
 
     public void setLesionmap(String lesionmap) {
         this.lesionmap = lesionmap;
+    }
+
+    public String getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(String backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 
     public String getStatus() {

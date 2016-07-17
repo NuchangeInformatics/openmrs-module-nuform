@@ -109,9 +109,19 @@ public class HibernateNuformDAO implements NuformDAO {
     }
 
     @Override
+    public void purgeNuform(Nuform nuform) {
+        sessionFactory.getCurrentSession().delete(nuform);
+    }
+
+    @Override
     public NuformDef saveNuformDef(NuformDef nuformDef) {
         sessionFactory.getCurrentSession().saveOrUpdate(nuformDef);
         return nuformDef;
+    }
+
+    @Override
+    public void purgeNuformDef(NuformDef nuformDef) {
+        sessionFactory.getCurrentSession().delete(nuformDef);
     }
 
 }

@@ -63,4 +63,21 @@ public class NuformUtilsFragmentController {
 
         Nuform saved = nuformService.saveNuform(nuform);
     }
+
+
+    public void purgeDef(@RequestParam(value = "nuformDefId", required = true) int nuformDefId,
+                         Errors errors,
+                         UiUtils ui) {
+        NuformService nuformService = Context.getService(NuformService.class);
+        NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
+        nuformService.purgeNuformDef(nuformDef);
+    }
+
+    public void purgeNuform(@RequestParam(value = "nuformId", required = true) int nuformId,
+                            Errors errors,
+                            UiUtils ui) {
+        NuformService nuformService = Context.getService(NuformService.class);
+        Nuform nuform = nuformService.getNuformById(nuformId);
+        nuformService.purgeNuform(nuform);
+    }
 }

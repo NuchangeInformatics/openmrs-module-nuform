@@ -57,6 +57,9 @@
             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleNuform", [nuformId: it.id])}">
                 <i class="icon-undo delete-action" title="UnDelete"></i>
             </a>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "purgeNuform", [nuformId: it.id])}">
+                <i class="icon-remove delete-action" title="Purge"></i>
+            </a>
             <% } %>
         </td>
     </tr>

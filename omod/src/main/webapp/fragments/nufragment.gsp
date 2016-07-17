@@ -92,6 +92,9 @@
                             <a href="${ui.actionLink("nuform", "nuformUtils", "toggleNuform", [nuformId: it.id])}">
                                 <i class="icon-undo delete-action" title="UnDelete"></i>
                             </a>
+                            <a href="${ui.actionLink("nuform", "nuformUtils", "purgeNuform", [nuformId: it.id])}">
+                                <i class="icon-remove delete-action" title="Purge"></i>
+                            </a>
                             <% } %>
                         </td>
                     </tr>
@@ -123,7 +126,7 @@
                     <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
                     <td>
                         <a href="${ui.pageLink("nuform", "nuform", [patientId: patient.id, nuformDefId: it.id])}">
-                            <i class="icon-pencil edit-action" title="Create"></i>
+                            <i class="icon-file-alt edit-action" title="Create"></i>
                         </a>
                         <a href="${ui.pageLink("nuform", "nuformListForDef", [nuformDefId: it.id])}">
                             <i class="icon-eye-open view-action" title="View"></i>
@@ -135,6 +138,9 @@
                     <td>
                         <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
                             <i class="icon-undo delete-action" title="UnDelete"></i>
+                        </a>
+                        <a href="${ui.actionLink("nuform", "nuformUtils", "purgeDef", [nuformDefId: it.id])}">
+                            <i class="icon-remove delete-action" title="Purge"></i>
                         </a>
 
                         <% } %></td>

@@ -46,9 +46,10 @@
                   length="38"/>
         <property name="last_edited_on" type="java.util.Date" column="last_edited_on"
                   length="38"/>
-        <property name="patientId" type="java.lang.String" column="patientId" length="38"/>
+        <many-to-one name="patient" column="patientId" class="org.openmrs.Patient"/>
         <property name="status" type="java.lang.String" column="status" length="1"/>
         <property name="lesionmap" type="java.lang.String" column="lesionmap"/>
+        <property name="backgroundImage" type="java.lang.String" column="backgroundImage"/>
         <property name="comments" type="java.lang.String" column="comments"/>
 
     </class>

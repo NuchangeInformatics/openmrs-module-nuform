@@ -6,6 +6,8 @@
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
 
+    ui.includeCss("nuform", "nuform.css")
+
 %>
 <script type="text/javascript">
     var breadcrumbs = [
@@ -13,29 +15,7 @@
         {label: "${ ui.escapeJs(ui.message("nuform.nuformDashboard.title")) }"}
     ]
 </script>
-<style type="text/css">
-#progressbox {
-    position: relative;
-    width: 400px;
-    border: 1px solid #ddd;
-    padding: 1px;
-    border-radius: 3px;
-}
 
-#progressbar {
-    background-color: lightblue;
-    width: 0%;
-    height: 20px;
-    border-radius: 4px;
-}
-
-#percent {
-    position: absolute;
-    display: inline-block;
-    top: 3px;
-    left: 48%;
-}
-</style>
 <script>
     var jq = jQuery;
     var image_pointer = 0;
@@ -121,7 +101,7 @@
                         image: (filesList[image_pointer]).trim()
                     },
                     function (data) {
-                        if (data.indexOf("${MESSAGE_SUCCESS}") >= 0) {
+                        if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
                             jq().toastmessage('showSuccessToast', "Image Deleted.");
                             location.reload();
                         } else {
@@ -183,8 +163,8 @@
 <form id="NuformCreate" method="post" action="${ui.pageLink("nuform", "nuformDashboard")}">
     <label for="formtype">Select Form Type. General forms are patient independent.</label>
     <select name="formtype" id="formtype">
-        <option value="general">General</option>
-        <option value="patient">Patient Specific</option>
+        <option value="${NUFORM_CONSTANTS.GENERALFORM}">General</option>
+        <option value="${NUFORM_CONSTANTS.PATIENTFORM}">Patient Specific</option>
     </select><br>
     <label for="backgroundImage">Choose / Upload Form above.</label>
     <input name="backgroundImage" id="backgroundImage" type="text"/>
@@ -194,30 +174,43 @@
 </form>
 
 <hr> <!-- Create NuForm Ends Here -->
-<h2>List of General Active NuForms</h2>
-<table>
+<h2>List of General (Patient Independent) NuForms</h2>
+<table class="nuformTable">
     <thead>
     <tr>
         <th>ID</th>
-        <th>Form Image</th>
+        <th>Form Image (Comments)</th>
         <th>Created On</th>
-        <th>Type <br>(1=General,<br> 2=Patient)</th>
+        <th>Type <br>(${NUFORM_CONSTANTS.GENERAL}=General,<br> ${NUFORM_CONSTANTS.PATIENT}=Patient)</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
 
     <% nuformdefs.each { %>
-    <tr>
+    <tr<% if (it.status != NUFORM_CONSTANTS.ACTIVE) { %> class="inactive" <% } %>>
         <td>${it.id}</td>
-        <td>${it.backgroundImage}</td>
+        <td>${it.backgroundImage} (${it.comments})</td>
         <td>${it.created_on}</td>
         <td>${it.formtype}</td>
+        <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
         <td>
-            <i class="icon-pencil edit-action" title="Create"></i>
-            <i class="icon-eye-open view-action" title="View"></i>
-            <i class="icon-remove delete-action" title="Delete"></i>
-        </td>
+            <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
+                <i class="icon-pencil edit-action" title="Create"></i>
+            </a>
+            <a href="${ui.pageLink("nuform", "nuformListForDef", [nuformDefId: it.id])}">
+                <i class="icon-eye-open view-action" title="View"></i>
+            </a>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
+                <i class="icon-remove delete-action" title="Delete"></i>
+            </a>
+            <% } else { %>
+        <td>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
+                <i class="icon-undo delete-action" title="UnDelete"></i>
+            </a>
+
+            <% } %></td>
     </tr>
     <% } %>
     </tbody>

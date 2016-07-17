@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Servlet implementation class DermUploadServlet
@@ -71,12 +72,14 @@ public class NuformUploadServlet extends HttpServlet {
             // Parse the request
             List items = upload.parseRequest(request);
             Iterator iter = items.iterator();
+            // Random prefix
+            Random random = new Random();
+            String prefix = "nuform_" + Integer.toString(random.nextInt(999)) + "_";
             while (iter.hasNext()) {
                 FileItem item = (FileItem) iter.next();
-
                 if (!item.isFormField()) {
                     String fileName = new File(item.getName()).getName();
-                    String filePath = uploadFolder + File.separator + fileName;
+                    String filePath = uploadFolder + File.separator + prefix + fileName;
                     File uploadedFile = new File(filePath);
                     System.out.println(filePath);
                     // saves the file to upload directory

@@ -9,6 +9,7 @@
  */
 package org.openmrs.module.nuform.api.db;
 
+import org.openmrs.Patient;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
@@ -25,7 +26,7 @@ public interface NuformDAO {
 	 * Add DAO methods here
 	 */
     @Transactional(readOnly = true)
-    List<NuformDef> getAllDef(String status);
+    List<NuformDef> getAllDef(String formtype);
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuforms(String status);
@@ -42,4 +43,8 @@ public interface NuformDAO {
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuformsByDef(NuformDef nuformDef);
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuformsByPatient(Patient patient);
+
 }

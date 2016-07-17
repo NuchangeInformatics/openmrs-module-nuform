@@ -21,7 +21,9 @@
 		</require_module>
 	</require_modules>
 
-	
+    <aware_of_modules>
+        org.openmrs.module.dermimage
+    </aware_of_modules>
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.NuformActivator</activator>
 

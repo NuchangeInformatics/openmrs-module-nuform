@@ -9,6 +9,7 @@
  */
 package org.openmrs.module.nuform.api;
 
+import org.openmrs.Patient;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformDef;
@@ -34,7 +35,7 @@ public interface NuformService extends OpenmrsService {
 	 * 
 	 */
     @Transactional(readOnly = true)
-    List<NuformDef> getAllDef(String status);
+    List<NuformDef> getAllDef(String formtype);
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuforms(String status);
@@ -51,4 +52,8 @@ public interface NuformService extends OpenmrsService {
 
     @Transactional(readOnly = true)
     List<Nuform> getAllNuformsByDef(NuformDef nuformDef);
+
+    @Transactional(readOnly = true)
+    List<Nuform> getAllNuformsByPatient(Patient patient);
+
 }

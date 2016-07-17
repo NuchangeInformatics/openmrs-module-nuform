@@ -1,6 +1,6 @@
 <%
     ui.decorateWith("appui", "standardEmrPage")
-
+    ui.includeFragment("appui", "standardEmrIncludes")
     ui.includeJavascript("nuform", "jquery.form.js")
     ui.includeJavascript("uicommons", "angular.js")
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
@@ -8,6 +8,7 @@
 
     ui.includeCss("nuform", "nuform.css")
 
+    ui.includeFragment("referenceapplication", "infoAndErrorMessages")
 %>
 <script type="text/javascript">
     var breadcrumbs = [
@@ -23,7 +24,6 @@
     var filesList = "${listOfFiles}";
     var num_files = ${numberOfFiles};
 
-
     // File list
     filesList = filesList.slice(1, -1);
     filesList = filesList.split(",");
@@ -31,6 +31,33 @@
 
     jq(document).ready(function () {
 
+        var confirmDeleteController = emr.setupConfirmationDialog({
+            selector: '#confirmDeletePopup',
+            actions: {
+                cancel: function () {
+                    confirmDeleteController.close();
+                },
+                confirm: function () {
+                    confirmDeleteController.close();
+                    jq.post("${ ui.actionLink("nuform","nuformUtils","deleteImage")}", {
+                                returnFormat: 'json',
+                                type: "data",
+                                image: (filesList[image_pointer]).trim()
+                            },
+                            function (data) {
+                                if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
+                                    jq().toastmessage('showSuccessToast', "Image Deleted.");
+                                    location.reload();
+                                } else {
+                                    jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
+                                }
+                            })
+                            .error(function () {
+                                jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
+                            });
+                }
+            }
+        });
 
         // Form Upload progressbar begin
         // Ref: simplecodestuffs file-upload-with-progress-bar-using-jquery-in-servlet
@@ -94,22 +121,9 @@
         });
 
         jq("#but_delete").click(function (e) {
-            jq.post("${ ui.actionLink("nuform","nuformUtils","deleteImage")}", {
-                        returnFormat: 'json',
-                        type: "data",
-                        image: (filesList[image_pointer]).trim()
-                    },
-                    function (data) {
-                        if (data.indexOf("${NUFORM_CONSTANTS.SUCCESS}") >= 0) {
-                            jq().toastmessage('showSuccessToast', "Image Deleted.");
-                            location.reload();
-                        } else {
-                            jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
-                        }
-                    })
-                    .error(function () {
-                        jq().toastmessage('showErrorToast', "Error. Try again after page refresh");
-                    });
+            console.log("delete clicked!");
+            confirmDeleteController.show();
+
         });
 
     });
@@ -216,3 +230,18 @@
     <% } %>
     </tbody>
 </table>
+
+<div id="confirmDeletePopup" class="dialog" style="display: none">
+    <div class="dialog-header">
+        <i class="icon-remove"></i>
+
+        <h3>${ui.message("nuform.delete.confirm")}</h3>
+    </div>
+
+    <div class="dialog-content">
+        <p class="dialog-instructions">${ui.message("nuform.delete.explanation")}</p>
+
+        <button class="confirm">${ui.message("referenceapplication.okay")}</button>
+        <button class="cancel">${ui.message("nuform.delete.cancel")}</button>
+    </div>
+</div>

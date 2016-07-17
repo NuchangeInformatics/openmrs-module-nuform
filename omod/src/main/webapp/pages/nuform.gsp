@@ -22,19 +22,28 @@
 <script>
     var formtype = "${formtype}";
     var imagePath;
+    var height = 830;
+    var width = 640;
     var backgroundImage = "${backgroundImage}";
     if (formtype === "${NUFORM_CONSTANTS.PERSONALFORM}") {
         imagePath = "../moduleServlet/dermimage/DermImageServlet?patId=${patientId}&image=${backgroundImage}"
     } else {
         imagePath = '../moduleServlet/nuform/NuformImageServlet?image=${backgroundImage}';
     }
-    // If it is an online form
-    if (backgroundImage.indexOf('://') > -1)
+    // If it is an online form, adjust to dimension.
+    // 17-July-2016: The height and width are not currently supported in widget.
+    if (backgroundImage.indexOf('://') > -1) {
+        var img = new Image();
+        img.onload = function () {
+            height = img.height + 50;
+            width = img.width;
+        };
         imagePath = backgroundImage;
+    }
     var NUFORM = {
         'image': imagePath,
-        'width': 640,
-        'height': 830,
+        'width': width,
+        'height': height,
         'nuform_in': '',
         'nuform_out': ''
     };

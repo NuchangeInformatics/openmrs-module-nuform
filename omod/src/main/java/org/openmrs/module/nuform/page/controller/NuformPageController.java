@@ -21,12 +21,14 @@ import java.util.Calendar;
 public class NuformPageController {
 
     public void get(@RequestParam(required = false, value = "nuformId", defaultValue = "0") int nuformId,
-                    @RequestParam("nuformDefId") int nuformDefId,
+                    @RequestParam(required = false, value = "nuformDefId", defaultValue = "0") int nuformDefId,
                     @RequestParam(required = false, value = "patientId", defaultValue = "0") int patientId,
+                    @RequestParam(required = false, value = "backgroundImage", defaultValue = "") String backgroundImage,
                     @RequestParam(required = false, value = "lesionmap", defaultValue = "") String lesionmap,
                     PageModel model) {
         NuformService nuformService = Context.getService(NuformService.class);
-        String backgroundImage = nuformService.getNuformDefById(nuformDefId).getBackgroundImage();
+        if (nuformDefId > 0)
+            backgroundImage = nuformService.getNuformDefById(nuformDefId).getBackgroundImage();
         if (nuformId > 0)
             lesionmap = nuformService.getNuformById(nuformId).getLesionmap();
         else

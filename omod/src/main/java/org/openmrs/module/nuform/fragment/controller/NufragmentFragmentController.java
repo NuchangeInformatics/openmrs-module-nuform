@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.openmrs.Patient;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.nuform.Nuform;
 import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.api.NuformService;
@@ -32,6 +33,12 @@ public class NufragmentFragmentController {
             patient = (Patient) (pt instanceof Patient ? pt : PropertyUtils.getProperty(pt, "patient"));
         NuformService nuformService = Context.getService(NuformService.class);
         List<Nuform> nuforms = nuformService.getAllNuformsByPatient(patient);
+        String dermimageStarted;
+        if (ModuleFactory.isModuleStarted("dermimage"))
+            dermimageStarted = NuformConstants.SUCCESS;
+        else
+            dermimageStarted = NuformConstants.ERROR;
+        model.addAttribute("dermimageStarted", dermimageStarted);
         model.addAttribute("NUFORM_CONSTANTS", NuformConstants.NUFORM_CONSTANTS());
         model.addAttribute("nuforms", nuforms);
         model.addAttribute("patient", patient);

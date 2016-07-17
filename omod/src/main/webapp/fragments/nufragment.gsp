@@ -155,7 +155,13 @@
 
         <div id="annotation-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 
-                Annotation
+            <% if (dermimageStarted == NUFORM_CONSTANTS.SUCCESS) { %>
+            <h3>Started!</h3>
+            <% } else { %>
+            <h3>Failure :(</h3>
+            <% } %>
+
+
 
         </div>
 

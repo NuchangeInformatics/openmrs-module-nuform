@@ -5,6 +5,7 @@ import org.openmrs.User;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformConstants;
 import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.NuformService;
 import org.openmrs.ui.framework.SimpleObject;
@@ -27,8 +28,12 @@ public class NuformPageController {
                     @RequestParam(required = false, value = "lesionmap", defaultValue = "") String lesionmap,
                     PageModel model) {
         NuformService nuformService = Context.getService(NuformService.class);
-        if (nuformDefId > 0)
-            backgroundImage = nuformService.getNuformDefById(nuformDefId).getBackgroundImage();
+        String formtype = "";
+        if (nuformDefId > 0) {
+            NuformDef nuformDef = nuformService.getNuformDefById(nuformDefId);
+            backgroundImage = nuformDef.getBackgroundImage();
+            formtype = nuformDef.getFormtype();
+        }
         if (nuformId > 0)
             lesionmap = nuformService.getNuformById(nuformId).getLesionmap();
         else
@@ -38,6 +43,8 @@ public class NuformPageController {
         model.addAttribute("patientId", patientId);
         model.addAttribute("lesionmap", lesionmap);
         model.addAttribute("backgroundImage", backgroundImage);
+        model.addAttribute("formtype", formtype);
+        model.addAttribute("NUFORM_CONSTANTS", NuformConstants.NUFORM_CONSTANTS());
 
     }
 

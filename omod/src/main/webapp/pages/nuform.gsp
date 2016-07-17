@@ -20,8 +20,15 @@
 </script>
 
 <script>
+    var formtype = ${formtype};
+    var imagePath;
+    if (formtype === ${NUFORM_CONSTANTS.PERSONALFORM}) {
+        imagePath = "../moduleServlet/dermimage/DermImageServlet?patId=${patientId}&image=${backgroundImage}"
+    } else {
+        imagePath = '../moduleServlet/nuform/NuformImageServlet?image=${backgroundImage}';
+    }
     var NUFORM = {
-        'image': '../moduleServlet/nuform/NuformImageServlet?image=${backgroundImage}',
+        'image': imagePath,
         'width': 640,
         'height': 830,
         'nuform_in': '',

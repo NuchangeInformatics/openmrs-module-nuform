@@ -105,7 +105,7 @@
             }
         });
 
-        jq("#but_usethis").click(function (e) {
+        jq(".but_usethis").click(function (e) {
             if (filesList[image_pointer].trim().length > 0) {
                 jq("#backgroundImage").val(filesList[image_pointer]);
             }
@@ -128,8 +128,56 @@
     });
 </script>
 
-<!-- img tag -->
-<div id="file_date"></div>
+<!-- Section 1 -->
+<h2>List of General (Patient Independent) Definitions:</h2>
+<table class="nuformTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Form Image (Comments)</th>
+        <th>Created On</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% nuformdefs.each { %>
+    <tr<% if (it.status != NUFORM_CONSTANTS.ACTIVE) { %> class="inactive" <% } %>>
+        <td>${it.id}</td>
+        <td>${it.backgroundImage} (${it.comments})</td>
+        <td>${it.created_on}</td>
+        <td>${it.formtype}</td>
+        <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
+        <td>
+            <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
+                <i class="icon-file-alt edit-action" title="Create NuForm"></i>
+            </a>
+            <a href="${ui.pageLink("nuform", "nuformListForDef", [nuformDefId: it.id])}">
+                <i class="icon-eye-open view-action" title="View NuForms"></i>
+            </a>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
+                <i class="icon-remove delete-action" title="Delete Definition"></i>
+            </a>
+            <% } else { %>
+        <td>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
+                <i class="icon-undo delete-action" title="UnDelete"></i>
+            </a>
+            <a href="${ui.actionLink("nuform", "nuformUtils", "purgeDef", [nuformDefId: it.id])}">
+                <i class="icon-remove delete-action" title="Purge"></i>
+            </a>
+            <% } %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
+
+
+<!-- Section 2 -->
+<h2>Select Form Image to create a new form definition:</h2>
+<strong>Image Name: </strong><div id="file_date"></div>
+<hr>
 <img alt="" id="patientimg" width="320" height="240"
      src="../ms/uiframework/resource/nuform/images/blank.png"/>
 
@@ -141,7 +189,7 @@
 <a class="button" id="but_right">
     <i class="icon-arrow-right"></i>
 </a>
-<a class="button" id="but_usethis">
+<a class="button but_usethis" id="but_usethis_up">
     <i class="icon-arrow-down"></i>
 </a>
 <a class="button" id="but_delete">
@@ -169,66 +217,29 @@
 <!-- Messages -->
 <div id="responds"></div>
 
-<hr> <!-- Form Upload Ends Here -->
-<h2>Create NuForm</h2>
+<!-- Section 3 -->
+<hr>
+<h2>Create Definition:</h2>
 
 <form id="NuformCreate" method="post" action="${ui.pageLink("nuform", "nuformDashboard")}">
     <label for="formtype">Select Form Type. General forms are patient independent.</label>
     <select name="formtype" id="formtype">
         <option value="${NUFORM_CONSTANTS.GENERALFORM}">General</option>
         <option value="${NUFORM_CONSTANTS.PATIENTFORM}">Patient Specific</option>
-    </select><br>
-    <label for="backgroundImage">Choose / Upload Form above.</label>
+    </select>
+
+    <label for="backgroundImage">Form Image:
+        <a class="button but_usethis" id="but_usethis_down">
+            <i class="icon-arrow-down"></i>
+        </a>
+    </label>
     <input name="backgroundImage" id="backgroundImage" type="text"/>
     <label for="nuform-comments">Comments</label>
     <textarea name="comment" id="nuform-comments"></textarea><br>
     <button type="submit" id="nuform-create">Create NuForm</button>
 </form>
 
-<hr> <!-- Create NuForm Ends Here -->
-<h2>List of General (Patient Independent) NuForms</h2>
-<table class="nuformTable">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Form Image (Comments)</th>
-        <th>Created On</th>
-        <th>Type</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <% nuformdefs.each { %>
-    <tr<% if (it.status != NUFORM_CONSTANTS.ACTIVE) { %> class="inactive" <% } %>>
-        <td>${it.id}</td>
-        <td>${it.backgroundImage} (${it.comments})</td>
-        <td>${it.created_on}</td>
-        <td>${it.formtype}</td>
-        <% if (it.status == NUFORM_CONSTANTS.ACTIVE) { %>
-        <td>
-            <a href="${ui.pageLink("nuform", "nuform", [nuformDefId: it.id])}">
-                <i class="icon-file-alt edit-action" title="Create"></i>
-            </a>
-            <a href="${ui.pageLink("nuform", "nuformListForDef", [nuformDefId: it.id])}">
-                <i class="icon-eye-open view-action" title="View"></i>
-            </a>
-            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
-                <i class="icon-remove delete-action" title="Delete"></i>
-            </a>
-            <% } else { %>
-        <td>
-            <a href="${ui.actionLink("nuform", "nuformUtils", "toggleDef", [nuformDefId: it.id])}">
-                <i class="icon-undo delete-action" title="UnDelete"></i>
-            </a>
-            <a href="${ui.actionLink("nuform", "nuformUtils", "purgeDef", [nuformDefId: it.id])}">
-                <i class="icon-remove delete-action" title="Purge"></i>
-            </a>
-            <% } %></td>
-    </tr>
-    <% } %>
-    </tbody>
-</table>
+<!-- Section 4 -->
 
 <div id="confirmDeletePopup" class="dialog" style="display: none">
     <div class="dialog-header">

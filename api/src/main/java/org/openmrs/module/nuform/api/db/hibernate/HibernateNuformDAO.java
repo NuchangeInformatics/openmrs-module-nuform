@@ -12,27 +12,116 @@ package org.openmrs.module.nuform.api.db.hibernate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.openmrs.Patient;
+import org.openmrs.module.nuform.Nuform;
+import org.openmrs.module.nuform.NuformDef;
 import org.openmrs.module.nuform.api.db.NuformDAO;
+
+import java.util.List;
 
 /**
  * It is a default implementation of  {@link NuformDAO}.
  */
+@SuppressWarnings("JpaQlInspection")
 public class HibernateNuformDAO implements NuformDAO {
 	protected final Log log = LogFactory.getLog(this.getClass());
 	
 	private SessionFactory sessionFactory;
 	
 	/**
-     * @param sessionFactory the sessionFactory to set
-     */
-    public void setSessionFactory(SessionFactory sessionFactory) {
-	    this.sessionFactory = sessionFactory;
-    }
-    
-	/**
      * @return the sessionFactory
      */
     public SessionFactory getSessionFactory() {
-	    return sessionFactory;
+        return sessionFactory;
     }
+    
+	/**
+     * @param sessionFactory the sessionFactory to set
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    // REF: http://levelup.lishman.com/spring/hibernate-orm/quick-start.php
+
+    @Override
+    public List getAllDef(String formtype) {
+        if (formtype.isEmpty())
+            return sessionFactory.getCurrentSession()
+                    .createCriteria(NuformDef.class)
+                    .list();
+        return sessionFactory.getCurrentSession()
+                .createCriteria(NuformDef.class)
+                .add(Restrictions.eq("formtype", formtype))
+                .list();
+
+    }
+
+    @Override
+    public List getAllNuforms(String status) {
+        if (status.isEmpty())
+            return sessionFactory.getCurrentSession()
+                    .createCriteria(Nuform.class)
+                    .list();
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("status", status))
+                .list();
+    }
+
+    @Override
+    public List getAllNuformsByDef(NuformDef nuformDef) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("nuformDef", nuformDef))
+                .list();
+    }
+
+    @Override
+    public List getAllNuformsByPatient(Patient patient) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("patient", patient))
+                .list();
+    }
+
+    @Override
+    public Nuform getNuformById(int id) {
+        return (Nuform) sessionFactory.getCurrentSession()
+                .createCriteria(Nuform.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
+    }
+
+    @Override
+    public NuformDef getNuformDefById(int id) {
+        return (NuformDef) sessionFactory.getCurrentSession()
+                .createCriteria(NuformDef.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
+    }
+
+    @Override
+    public Nuform saveNuform(Nuform nuform) {
+        sessionFactory.getCurrentSession().saveOrUpdate(nuform);
+        return nuform;
+    }
+
+    @Override
+    public void purgeNuform(Nuform nuform) {
+        sessionFactory.getCurrentSession().delete(nuform);
+    }
+
+    @Override
+    public NuformDef saveNuformDef(NuformDef nuformDef) {
+        sessionFactory.getCurrentSession().saveOrUpdate(nuformDef);
+        return nuformDef;
+    }
+
+    @Override
+    public void purgeNuformDef(NuformDef nuformDef) {
+        sessionFactory.getCurrentSession().delete(nuformDef);
+    }
+
 }

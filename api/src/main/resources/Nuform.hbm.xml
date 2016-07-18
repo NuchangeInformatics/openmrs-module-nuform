@@ -5,16 +5,54 @@
 
 <hibernate-mapping package="org.openmrs.module.nuform">
 
-<!--
-	<class name="Nuform"
-		table="nuform">
+
+    <class name="NuformDef"
+           table="nuformdef">
 		<id name="id" type="int" column="id" unsaved-value="0">
 			<generator class="native" />
 		</id>
 		<discriminator column="id" insert="false" />
 		<property name="uuid" type="java.lang.String" column="uuid"
 			length="38" unique="true" />
-	</class>
--->
+        <property name="created_by" type="java.lang.String" column="created_by" length="38"/>
+        <property name="deleted_by" type="java.lang.String" column="deleted_by" length="38"/>
+        <property name="created_on" type="java.util.Date" column="created_on"
+                  length="38"/>
+        <property name="deleted_on" type="java.util.Date" column="deleted_on"
+                  length="38"/>
+        <property name="formtype" type="java.lang.String" column="formtype" length="1"/>
+        <property name="status" type="java.lang.String" column="status" length="1"/>
+        <property name="backgroundImage" type="java.lang.String" column="backgroundImage" length="255"/>
+
+        <property name="comments" type="java.lang.String" column="comments"/>
+
+    </class>
+
+    <class name="Nuform"
+           table="nuform">
+        <id name="id" type="int" column="id" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        <discriminator column="id" insert="false"/>
+        <property name="uuid" type="java.lang.String" column="uuid"
+                  length="38" unique="true"/>
+        <many-to-one name="nuformDef" column="nuformDef" class="org.openmrs.module.nuform.NuformDef"/>
+        <property name="created_by" type="java.lang.String" column="created_by" length="38"/>
+        <property name="deleted_by" type="java.lang.String" column="deleted_by" length="38"/>
+        <property name="last_edited_by" type="java.lang.String" column="last_edited_by" length="38"/>
+        <property name="created_on" type="java.util.Date" column="created_on"
+                  length="38"/>
+        <property name="deleted_on" type="java.util.Date" column="deleted_on"
+                  length="38"/>
+        <property name="last_edited_on" type="java.util.Date" column="last_edited_on"
+                  length="38"/>
+        <many-to-one name="patient" column="patientId" class="org.openmrs.Patient"/>
+        <property name="status" type="java.lang.String" column="status" length="1"/>
+        <property name="lesionmap" type="java.lang.String" column="lesionmap"/>
+        <property name="backgroundImage" type="java.lang.String" column="backgroundImage"/>
+        <property name="comments" type="java.lang.String" column="comments"/>
+
+    </class>
+
 
 </hibernate-mapping>

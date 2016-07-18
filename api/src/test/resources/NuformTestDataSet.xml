@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    This Source Code Form is subject to the terms of the Mozilla Public License,
+    v. 2.0. If a copy of the MPL was not distributed with this file, You can
+    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+    the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+
+    Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+    graphic logo is a trademark of OpenMRS Inc.
+
+
+
+
+-->
+
+<dataset>
+    <NuformDef id="1" uuid="6e3e3a5c-aedb-494f-940e-e4d65fa7e9fd"
+               created_by="beapen" deleted_by="" formtype="1" backgroundImage="default.png"
+               status="1" comments="test comment"/>
+    <Nuform id="1" uuid="6a3d3a5c-aedb-494f-940e-e4d65fa7e9fd"
+            nuformDef="1" patientId="1" lesionmap=""
+            created_by="beapen" last_edited_by="beapen" deleted_by=""
+            status="1" comments="test comment"/>
+    <Nuform id="2" uuid="6a3d3a5a-aebb-494f-940e-e4d65fa7e9fd"
+            nuformDef="1" patientId="1" lesionmap=""
+            created_by="beapen" last_edited_by="beapen" deleted_by=""
+            status="1" comments="test comment"/>
+
+</dataset>

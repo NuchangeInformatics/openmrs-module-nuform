@@ -1,6 +1,6 @@
 # Touch Sensitive Form Module for OpenMRS (openmrs-module-nuform)
 
-![OpenMRS NuForm Module](https://raw.github.com/dermatologist/openmrs-module-nuform/master/docs/nuform.png)
+![OpenMRS NuForm Module](https://raw.github.com/dermatologist/openmrs-module-nuform/master/doc/nuform.png)
 
 [![Build Status](https://travis-ci.org/dermatologist/openmrs-module-nuform.svg)](https://travis-ci.org/dermatologist/openmrs-module-nuform)
 

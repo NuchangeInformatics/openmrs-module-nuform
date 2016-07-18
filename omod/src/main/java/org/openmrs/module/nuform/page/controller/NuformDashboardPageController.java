@@ -44,7 +44,7 @@ public class NuformDashboardPageController {
     }
 
     public String post(@RequestParam("formtype") String formtype,
-                       @RequestParam("backgroundImage") String backgroundImage,
+                       @RequestParam(required = false, value = "backgroundImage", defaultValue = "") String backgroundImage,
                        @RequestParam(required = false, value = "comment", defaultValue = "") String comment,
                        Errors errors,
                        UiUtils ui) {

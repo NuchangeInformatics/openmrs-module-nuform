@@ -74,7 +74,7 @@ public class  NuformServiceTest extends BaseModuleContextSensitiveTest {
     public void shouldReturnNuformsByDef() {
         NuformDef nuformDef = nuformService.getNuformDefById(1);
         List<Nuform> nuform = nuformService.getAllNuformsByDef(nuformDef);
-        assertEquals("Should return two nuforms: ", nuform.size(), 2);
+        assertEquals("Should return two nuforms: ", 2, nuform.size());
     }
 
     @Test

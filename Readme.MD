@@ -28,7 +28,7 @@ If you have installed my 'Clinical Images' module, you can annotate your clinica
 Development:
 
 The inking engine is an [angular2 project on GitHub using FabricJS](https://github.com/E-Health/angular2-nuform).
- The NuForm is also available as an eForm for OSCAR EMR.
+ The NuForm is also available as an [eForm for OSCAR EMR](http://nuchange.ca/2016/06/touch-sensitive-oscar-eform.html).
 
 ## How do I install and use this module?
 - [Download latest release](https://modules.openmrs.org/#/show/256/nuform). Upload omod to OpenMRS.
@@ -40,4 +40,4 @@ The inking engine is an [angular2 project on GitHub using FabricJS](https://gith
 
 ## Contact Me
 * Visit [my blog](http://nuchange.ca).
-* [Issues and Feature Requests](https://github.com/E-Health/openmrs-module-nuform/issues)
+* [Issues and Feature Requests](https://github.com/dermatologist/openmrs-module-nuform/issues)

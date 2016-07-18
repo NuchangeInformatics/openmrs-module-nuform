@@ -19,11 +19,11 @@
                created_by="beapen" deleted_by="" formtype="1" backgroundImage="default.png"
                status="1" comments="test comment"/>
     <Nuform id="1" uuid="6a3d3a5c-aedb-494f-940e-e4d65fa7e9fd"
-            nuformDef="1" patientId="1" lesionmap=""
+            nuformDef="1" patientId="2" lesionmap=""
             created_by="beapen" last_edited_by="beapen" deleted_by=""
             status="1" comments="test comment"/>
     <Nuform id="2" uuid="6a3d3a5a-aebb-494f-940e-e4d65fa7e9fd"
-            nuformDef="1" patientId="1" lesionmap=""
+            nuformDef="1" patientId="2" lesionmap=""
             created_by="beapen" last_edited_by="beapen" deleted_by=""
             status="1" comments="test comment"/>
 

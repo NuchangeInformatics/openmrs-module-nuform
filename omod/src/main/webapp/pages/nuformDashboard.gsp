@@ -193,7 +193,7 @@
         <th>ID</th>
         <th>Form Image (Comments)</th>
         <th>Created On</th>
-        <th>Type <br>(${NUFORM_CONSTANTS.GENERAL}=General,<br> ${NUFORM_CONSTANTS.PATIENT}=Patient)</th>
+        <th>Type</th>
         <th>Actions</th>
     </tr>
     </thead>

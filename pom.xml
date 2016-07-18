@@ -17,13 +17,13 @@
 	</developers>
 	
 	<organization>
-		<name>OpenMRS</name>
-		<url>http://openmrs.org</url>
+		<name>NuChange Informatics</name>
+		<url>http://nuchange.ca</url>
 	</organization>
 
 	<scm>
 		<connection>scm:git:git@github.com:dermatologist/openmrs-module-nuform.git</connection>
-		<developerConnection>scm:git:git@github.com:dermatologistopenmrs-module-nuform.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:dermatologist/openmrs-module-nuform.git</developerConnection>
 		<url>https://github.com/dermatologist/openmrs-module-nuform</url>
 	</scm>
 	

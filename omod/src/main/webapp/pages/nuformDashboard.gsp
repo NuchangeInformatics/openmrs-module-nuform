@@ -228,7 +228,7 @@
         <option value="${NUFORM_CONSTANTS.PATIENTFORM}">Patient Specific</option>
     </select>
 
-    <label for="backgroundImage">Form Image:
+    <label for="backgroundImage">Form Image: (Use complete URL for online images.)
         <a class="button but_usethis" id="but_usethis_down">
             <i class="icon-arrow-down"></i>
         </a>

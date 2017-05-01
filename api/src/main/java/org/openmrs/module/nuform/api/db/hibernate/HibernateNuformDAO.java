@@ -146,7 +146,7 @@ public class HibernateNuformDAO implements NuformDAO {
             }
         }
         
-        return null;
+        //return null;
     }
 
 }

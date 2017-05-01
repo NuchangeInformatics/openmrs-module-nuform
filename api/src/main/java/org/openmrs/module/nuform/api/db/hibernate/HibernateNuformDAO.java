@@ -20,6 +20,8 @@ import org.openmrs.module.nuform.api.db.NuformDAO;
 
 import java.util.List;
 
+import java.lang.reflect.Method; //Hibernate Fix
+
 /**
  * It is a default implementation of  {@link NuformDAO}.
  */
@@ -48,10 +50,10 @@ public class HibernateNuformDAO implements NuformDAO {
     @Override
     public List getAllDef(String formtype) {
         if (formtype.isEmpty())
-            return sessionFactory.getCurrentSession()
+            return getCurrentSession()
                     .createCriteria(NuformDef.class)
                     .list();
-        return sessionFactory.getCurrentSession()
+        return getCurrentSession()
                 .createCriteria(NuformDef.class)
                 .add(Restrictions.eq("formtype", formtype))
                 .list();
@@ -61,10 +63,10 @@ public class HibernateNuformDAO implements NuformDAO {
     @Override
     public List getAllNuforms(String status) {
         if (status.isEmpty())
-            return sessionFactory.getCurrentSession()
+            return getCurrentSession()
                     .createCriteria(Nuform.class)
                     .list();
-        return sessionFactory.getCurrentSession()
+        return getCurrentSession()
                 .createCriteria(Nuform.class)
                 .add(Restrictions.eq("status", status))
                 .list();
@@ -72,7 +74,7 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public List getAllNuformsByDef(NuformDef nuformDef) {
-        return sessionFactory.getCurrentSession()
+        return getCurrentSession()
                 .createCriteria(Nuform.class)
                 .add(Restrictions.eq("nuformDef", nuformDef))
                 .list();
@@ -80,7 +82,7 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public List getAllNuformsByPatient(Patient patient) {
-        return sessionFactory.getCurrentSession()
+        return getCurrentSession()
                 .createCriteria(Nuform.class)
                 .add(Restrictions.eq("patient", patient))
                 .list();
@@ -88,7 +90,7 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public Nuform getNuformById(int id) {
-        return (Nuform) sessionFactory.getCurrentSession()
+        return (Nuform) getCurrentSession()
                 .createCriteria(Nuform.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
@@ -96,7 +98,7 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public NuformDef getNuformDefById(int id) {
-        return (NuformDef) sessionFactory.getCurrentSession()
+        return (NuformDef) getCurrentSession()
                 .createCriteria(NuformDef.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
@@ -104,24 +106,47 @@ public class HibernateNuformDAO implements NuformDAO {
 
     @Override
     public Nuform saveNuform(Nuform nuform) {
-        sessionFactory.getCurrentSession().saveOrUpdate(nuform);
+        getCurrentSession().saveOrUpdate(nuform);
         return nuform;
     }
 
     @Override
     public void purgeNuform(Nuform nuform) {
-        sessionFactory.getCurrentSession().delete(nuform);
+        getCurrentSession().delete(nuform);
     }
 
     @Override
     public NuformDef saveNuformDef(NuformDef nuformDef) {
-        sessionFactory.getCurrentSession().saveOrUpdate(nuformDef);
+        getCurrentSession().saveOrUpdate(nuformDef);
         return nuformDef;
     }
 
     @Override
     public void purgeNuformDef(NuformDef nuformDef) {
-        sessionFactory.getCurrentSession().delete(nuformDef);
+        getCurrentSession().delete(nuformDef);
+    }
+
+    /**
+     * Gets the current hibernate session while taking care of the hibernate 3 and 4 differences.
+     * dkayiwa's fix: https://github.com/openmrs/openmrs-module-xforms/commit/5d79f327d27777a40ec755a90433e4dc69067e4a
+     * @return the current hibernate session.
+     */
+    private org.hibernate.Session getCurrentSession() {
+        try {
+            return sessionFactory.getCurrentSession();
+        }
+        catch (NoSuchMethodError ex) {
+            try {
+                Method method = sessionFactory.getClass().getMethod("getCurrentSession", null);
+                return (org.hibernate.Session)method.invoke(sessionFactory, null);
+            }
+            catch (Exception e) {
+                log.error("Failed to get the hibernate session", e);
+                throw new RuntimeException("Failed to get the current hibernate session", e);
+            }
+        }
+        
+        return null;
     }
 
 }

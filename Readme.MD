@@ -31,7 +31,7 @@ The inking engine is an [angular2 project on GitHub using FabricJS](https://gith
  The NuForm is also available as an [eForm for OSCAR EMR](http://nuchange.ca/2016/06/touch-sensitive-oscar-eform.html).
 
 ## How do I install and use this module?
-- [Download latest release](https://modules.openmrs.org/#/show/256/nuform). Upload omod to OpenMRS.
+- [Download latest release](https://modules.openmrs.org/#/show/257/nuform). Upload omod to OpenMRS.
 - Watch this video: [http://nuchange.ca/openmrs-module-nuform-video](http://nuchange.ca/openmrs-module-nuform-video)
 
 ## Credits

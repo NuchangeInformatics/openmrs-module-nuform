@@ -4,7 +4,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>nuform</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Nuform</name>
 	<description>Touch sensitive forms for openMRS</description>
@@ -24,7 +24,8 @@
 		<connection>scm:git:git@github.com:dermatologist/openmrs-module-nuform.git</connection>
 		<developerConnection>scm:git:git@github.com:dermatologist/openmrs-module-nuform.git</developerConnection>
 		<url>https://github.com/dermatologist/openmrs-module-nuform</url>
-	</scm>
+	  <tag>HEAD</tag>
+  </scm>
 	
 	<properties>
 		<openMRSVersion>1.11.6</openMRSVersion>

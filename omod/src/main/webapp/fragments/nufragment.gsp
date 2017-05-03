@@ -42,7 +42,7 @@
         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
             <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active">
                 <a href="#nuform-tab" class="ui-tabs-anchor">
-                    Nuorms
+                    Nuforms
                 </a>
             </li>
             <li class="ui-state-default ui-corner-top">
